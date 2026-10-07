@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Efeler Toptan Et — Toptan Dana ve Kuzu Eti</title>
+<meta name="description" content="Restoran, otel, catering ve marketler için toptan dana ve kuzu eti. Karkas ya da parça, taze ya da donuk.">
+<meta name="theme-color" content="#1A1B16">
+<!-- TASLAK: müşteri onayı süresince arama motorları dizine eklemesin. Yayına çıkarken bu satırı kaldırın. -->
+<meta name="robots" content="noindex, nofollow">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:site_name" content="Efeler Toptan Et">
+<meta property="og:title" content="Efeler Toptan Et — Toptan Dana ve Kuzu Eti">
+<meta property="og:description" content="Restoran, otel, catering ve marketler için toptan dana ve kuzu eti. Karkas ya da parça, taze ya da donuk.">
+<!-- Alan adı belli olunca tam adres yapın: https://.../assets/img/efeler-logo.png -->
+<meta property="og:image" content="assets/img/efeler-logo.png">
+<meta property="og:image:width" content="900">
+<meta property="og:image:height" content="868">
+<meta property="og:image:alt" content="Efeler Kasap Izgara logosu">
+
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<!-- İlk boyamadan önce: tema (kayıtlı tercih, yoksa cihaz ayarı) ve JS sınıfı -->
+<script>(function(d){var t;try{t=localStorage.getItem('efeler-tema')}catch(e){}if(t!=='light'&&t!=='dark')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';d.setAttribute('data-theme',t);d.classList.add('js')})(document.documentElement);</script>
+<script src="assets/js/main.js" defer></script>
+</head>
+<body id="top">
+
+<!-- Çizgi ikonlar: <svg><use href="#i-..."></use></svg> ile kullanılır -->
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.7-5.2A8.5 8.5 0 1 1 21 11.5z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></symbol>
+</svg>
+
+<a class="skip-link" href="#icerik">İçeriğe geç</a>
+
+<!-- ÜST BİLGİ ŞERİDİ (sabitlenmez) -->
+<aside class="topbar" aria-label="Hızlı iletişim">
+  <div class="container topbar__inner">
+    <span>TOPTAN DANA &amp; KUZU ETİ — RESTORAN · OTEL · CATERING · MARKET</span>
+    <div class="topbar__contact">
+      <span data-site="calismaSaatleri" data-upper>[ÇALIŞMA SAATLERİ]</span>
+      <a class="bar-link" href="#teklif" data-site="telefon" data-site-href="telefon">[TELEFON]</a>
+      <a class="bar-link" href="#teklif" data-site-href="whatsapp">WHATSAPP</a>
+    </div>
+  </div>
+</aside>
+
+<!-- MENÜ (yapışkan) -->
+<header class="site-header" data-header>
+  <div class="container site-header__inner">
+    <div class="site-header__row">
+      <a class="brand" href="#top" aria-label="Efeler ana sayfa">
+        <img class="brand__logo" src="assets/img/efeler-logo.png" alt="Efeler Kasap Izgara logosu" width="76" height="73">
+        <span class="brand__text" aria-hidden="true">
+          <span class="brand__name">EFELER</span>
+          <span class="brand__sub">TOPTAN ET</span>
+        </span>
+      </a>
+      <nav class="nav" id="ana-menu" aria-label="Ana menü" data-nav>
+        <a class="nav__link" href="#kime">Kime Hizmet</a>
+        <a class="nav__link" href="#kesim">Kesim Şeması</a>
+        <a class="nav__link" href="#urunler">Ürünler</a>
+        <a class="nav__link" href="#surec">Süreç</a>
+        <a class="nav__link" href="#sertifikalar">Sertifikalar</a>
+        <a class="nav__link" href="#referanslar">Referanslar</a>
+      </nav>
+      <div class="site-header__actions">
+        <button class="theme-toggle" type="button" aria-label="Karanlık temaya geç" hidden data-theme-toggle>
+          <svg class="icon theme-toggle__moon" width="22" height="22" aria-hidden="true"><use href="#i-moon"/></svg>
+          <svg class="icon theme-toggle__sun" width="22" height="22" aria-hidden="true"><use href="#i-sun"/></svg>
+        </button>
+        <a class="btn btn--red btn--sm site-header__cta" href="#teklif">
+          TEKLİF AL
+          <svg class="icon icon--bold" width="22" height="22" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
+        <button class="menu-toggle" type="button" aria-label="Menü" aria-expanded="false" aria-controls="ana-menu" hidden data-menu-toggle>
+          <svg class="icon icon--bold menu-toggle__open" width="26" height="26" aria-hidden="true"><use href="#i-menu"/></svg>
+          <svg class="icon icon--bold menu-toggle__close" width="26" height="26" aria-hidden="true"><use href="#i-close"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="icerik">
+
+  <!-- KAPAK -->
+  <section class="hero" aria-labelledby="kapak-baslik" data-hero>
+    <div class="container hero__inner">
+      <div class="hero__text">
+        <p class="hero__eyebrow">
+          <span class="hero__rule" aria-hidden="true"></span>
+          <span>TOPTAN ET TEDARİKÇİSİ · <span data-site="sehir" data-upper>[ŞEHİR]</span></span>
+        </p>
+        <h1 class="hero__title" id="kapak-baslik">TOPTAN ET,<br><span class="accent">USTA İŞİ</span><br>KESİM.</h1>
+        <p class="hero__lead">Restoran, otel, catering ve marketler için dana ve kuzu. Karkas ya da parça, taze ya da donuk; listenizi gönderin, fiyatını verelim.</p>
+        <div class="btn-row">
+          <a class="btn btn--red btn--lg" href="#teklif">
+            TEKLİF AL
+            <svg class="icon icon--bold" width="24" height="24" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+          <a class="btn btn--ghost btn--lg" href="#urunler">ÜRÜNLERİ GÖR</a>
+        </div>
+      </div>
+
+      <div class="hero__media">
+        <div class="hero__figure">
+          <div class="hero__disk" aria-hidden="true"></div>
+          <div class="ph hero__photo">
+            <span class="ph__label" aria-hidden="true">
+              <b>KAPAK FOTOĞRAFI</b>
+              <span>tezgâhta usta ya da soğuk oda</span>
+              <span>kare · en az 1200 px</span>
+            </span>
+            <img src="assets/img/kapak.jpg" alt="Siyah eldivenli kasap, ahşap kütük üzerinde bıçakla kemikli et kesiyor" width="1200" height="1200">
+          </div>
+          <svg class="stamp" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+            <defs><path id="stampArc" d="M 100,100 m -76,0 a 76,76 0 1,1 152,0 a 76,76 0 1,1 -152,0"/></defs>
+            <circle class="stamp__disc" cx="100" cy="100" r="99"/>
+            <text class="stamp__ring"><textPath href="#stampArc">DANA · KUZU · KARKAS · PARÇA · TAZE · DONUK · </textPath></text>
+            <circle class="stamp__inner" cx="100" cy="100" r="56"/>
+            <text class="stamp__top" x="100" y="94">TOPTAN</text>
+            <text class="stamp__et" x="100" y="130">ET</text>
+          </svg>
+          <img class="hero__sticker" src="assets/img/efeler-logo.png" alt="" width="900" height="868">
+        </div>
+      </div>
+    </div>
+
+    <div class="container hero__facts">
+      <dl class="facts">
+        <div class="facts__item">
+          <dt>KURULUŞ</dt>
+          <dd data-site="kurulusYili" data-upper>[YIL]</dd>
+        </div>
+        <div class="facts__item">
+          <dt>GÜNLÜK KAPASİTE</dt>
+          <dd data-site="gunlukKapasite" data-upper>[TON / GÜN]</dd>
+        </div>
+        <div class="facts__item">
+          <dt>TESLİMAT BÖLGESİ</dt>
+          <dd data-site="teslimatBolgesi" data-upper>[İLLER]</dd>
+        </div>
+        <div class="facts__item">
+          <dt>ÜRÜN FORMU</dt>
+          <dd>TAZE &amp; DONUK</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- KAYAN ÜRÜN ŞERİDİ (süs) -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+      <div class="ticker__group">
+        <span>DANA KARKAS</span><span class="ticker__dot"></span>
+        <span>ANTRİKOT</span><span class="ticker__dot"></span>
+        <span>BONFİLE</span><span class="ticker__dot"></span>
+        <span>KONTRAFİLE</span><span class="ticker__dot"></span>
+        <span>KUZU BUT</span><span class="ticker__dot"></span>
+        <span>KUZU GERDAN</span><span class="ticker__dot"></span>
+        <span>KIYMA</span><span class="ticker__dot"></span>
+        <span>KUŞBAŞI</span><span class="ticker__dot"></span>
+        <span>YAPRAK DÖNER</span><span class="ticker__dot"></span>
+      </div>
+      <div class="ticker__group">
+        <span>DANA KARKAS</span><span class="ticker__dot"></span>
+        <span>ANTRİKOT</span><span class="ticker__dot"></span>
+        <span>BONFİLE</span><span class="ticker__dot"></span>
+        <span>KONTRAFİLE</span><span class="ticker__dot"></span>
+        <span>KUZU BUT</span><span class="ticker__dot"></span>
+        <span>KUZU GERDAN</span><span class="ticker__dot"></span>
+        <span>KIYMA</span><span class="ticker__dot"></span>
+        <span>KUŞBAŞI</span><span class="ticker__dot"></span>
+        <span>YAPRAK DÖNER</span><span class="ticker__dot"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 01 KİME HİZMET -->
+  <section class="section section--alt kime" id="kime" aria-labelledby="kime-baslik">
+    <div class="container section__inner">
+      <div class="section-head">
+        <div class="section-head__title">
+          <p class="label">01 — KİME HİZMET VERİYORUZ</p>
+          <h2 class="h-section" id="kime-baslik">KİMİN MUTFAĞINA<br>ET VERİYORUZ?</h2>
+        </div>
+        <p class="section-head__aside">Her mutfağın et ihtiyacı başka. Siparişi işletmenizin çalışma şekline göre hazırlıyoruz.</p>
+      </div>
+
+      <ul class="seg-list">
+        <li>
+          <a class="seg-row" href="#teklif">
+            <span class="seg-row__num">01</span>
+            <span class="seg-row__title">RESTORAN &amp; STEAKHOUSE</span>
+            <span class="seg-row__desc">Antrikot, bonfile, kontrafile; istediğiniz kalınlıkta porsiyonluk kesim.</span>
+            <svg class="icon" width="30" height="30" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </li>
+        <li>
+          <a class="seg-row" href="#teklif">
+            <span class="seg-row__num">02</span>
+            <span class="seg-row__title">OTEL &amp; CATERING</span>
+            <span class="seg-row__desc">Kuşbaşı, kıyma, rosto ve haşlamalık; haftalık plana göre düzenli sevkiyat.</span>
+            <svg class="icon" width="30" height="30" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </li>
+        <li>
+          <a class="seg-row" href="#teklif">
+            <span class="seg-row__num">03</span>
+            <span class="seg-row__title">DÖNERCİ &amp; KÖFTECİ</span>
+            <span class="seg-row__desc">Yaprak döner eti, köftelik ve lahmacunluk kıyma; yağ oranı sizin tarifinize göre.</span>
+            <svg class="icon" width="30" height="30" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </li>
+        <li>
+          <a class="seg-row" href="#teklif">
+            <span class="seg-row__num">04</span>
+            <span class="seg-row__title">MARKET &amp; KASAP</span>
+            <span class="seg-row__desc">Dana ve kuzu karkas, çeyrek ve set ürünler; reyona hazır parça et.</span>
+            <svg class="icon" width="30" height="30" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 02 KESİM ŞEMASI -->
+  <section class="section section--muted kesim" id="kesim" aria-labelledby="kesim-baslik" data-cutmap>
+    <div class="container section__inner">
+      <div class="section-head">
+        <div class="section-head__title">
+          <p class="label">02 — KESİM ŞEMASI</p>
+          <h2 class="h-section" id="kesim-baslik">DANANIN <span class="accent">HARİTASI</span></h2>
+        </div>
+        <p class="section-head__aside">Parçanın üzerine gelin: hangi et nereden çıkar, en çok nerede kullanılır.</p>
+      </div>
+
+      <div class="cutmap">
+        <div class="cutmap__figure">
+          <!-- Elle çizilmiş şema: koordinatlara dokunmayın. Her parçanın data-c numarası listedekiyle aynı. -->
+          <svg viewBox="0 0 960 560" role="img" aria-label="Dana kesim şeması: on bir ana parça numaralarıyla gösterilir">
+            <g class="cutmap__back">
+              <polygon points="336,376 378,380 370,524 340,524"/>
+              <polygon points="712,356 756,348 750,440 760,524 724,524 720,440"/>
+              <path d="M 806 110 C 884 104 914 162 908 250 L 920 300 L 890 300 L 896 250 C 900 178 874 130 812 124 Z"/>
+            </g>
+            <g class="cutmap__head">
+              <polygon points="126,112 100,82 108,48 122,82 146,106"/>
+              <polygon points="152,112 198,88 186,128"/>
+              <polygon points="172,126 152,214 128,252 86,268 52,256 44,226 70,188 92,140 128,116"/>
+            </g>
+            <circle class="cutmap__eye" cx="106" cy="174" r="6"/>
+            <polygon class="cut" data-c="1" points="172,126 250,120 238,238 196,262 152,214"/>
+            <polygon class="cut" data-c="2" points="250,120 380,112 382,256 238,238"/>
+            <polygon class="cut" data-c="3" points="380,112 500,118 502,250 382,256"/>
+            <polygon class="cut" data-c="4" points="500,118 610,114 612,240 502,250"/>
+            <polygon class="cut" data-c="6" points="610,114 715,104 722,236 612,240"/>
+            <polygon class="cut" data-c="7" points="715,104 800,112 858,150 878,240 850,318 790,338 735,348 748,304 728,276 722,236"/>
+            <polygon class="cut" data-c="5" points="502,250 612,240 722,236 728,276 614,282 503,292"/>
+            <polygon class="cut" data-c="8" points="238,238 382,256 390,380 305,372 232,330 196,262"/>
+            <polygon class="cut" data-c="9" points="382,256 502,250 503,292 505,388 390,380"/>
+            <polygon class="cut" data-c="10" points="503,292 614,282 728,276 748,304 735,348 620,378 505,388"/>
+            <polygon class="cut" data-c="11" points="232,330 305,372 296,446 300,524 260,524 256,446"/>
+            <polygon class="cut" data-c="11" points="790,338 850,318 840,424 836,524 794,524 800,424"/>
+            <g class="cutmap__nums">
+              <text x="203" y="194">1</text>
+              <text x="312" y="194">2</text>
+              <text x="441" y="196">3</text>
+              <text x="556" y="192">4</text>
+              <text x="613" y="275">5</text>
+              <text x="666" y="184">6</text>
+              <text x="800" y="232">7</text>
+              <text x="300" y="322">8</text>
+              <text x="446" y="334">9</text>
+              <text x="622" y="342">10</text>
+              <text x="279" y="456">11</text>
+              <text x="819" y="440">11</text>
+            </g>
+          </svg>
+        </div>
+
+        <ol class="cut-list">
+          <li><button class="cut-item" type="button" data-c="1" aria-pressed="false"><span class="cut-item__n">1</span><span class="cut-item__text"><span class="cut-item__name">GERDAN</span><span class="cut-item__use">haşlama, kıyma, sulu yemek</span></span></button></li>
+          <li><button class="cut-item" type="button" data-c="2" aria-pressed="false"><span class="cut-item__n">2</span><span class="cut-item__text"><span class="cut-item__name">KÜREK (KOL)</span><span class="cut-item__use">kuşbaşı, kıyma, tas kebabı</span></span></button></li>
+          <li><button class="cut-item" type="button" data-c="3" aria-pressed="false"><span class="cut-item__n">3</span><span class="cut-item__text"><span class="cut-item__name">ANTRİKOT</span><span class="cut-item__use">ızgara, steak</span></span></button></li>
+          <li><button class="cut-item" type="button" data-c="4" aria-pressed="false"><span class="cut-item__n">4</span><span class="cut-item__text"><span class="cut-item__name">KONTRAFİLE</span><span class="cut-item__use">ızgara, rosto</span></span></button></li>
+          <li><button class="cut-item" type="button" data-c="5" aria-pressed="false"><span class="cut-item__n">5</span><span class="cut-item__text"><span class="cut-item__name">BONFİLE</span><span class="cut-item__use">madalyon, şatobriyan</span></span></button></li>
+          <li><button class="cut-item" type="button" data-c="6" aria-pressed="false"><span class="cut-item__n">6</span><span class="cut-item__text"><span class="cut-item__name">SOKUM</span><span class="cut-item__use">biftek, rosto, şiş</span></span></button></li>
+          <li><button class="cut-item" type="button" data-c="7" aria-pressed="false"><span class="cut-item__n">7</span><span class="cut-item__text"><span class="cut-item__name">BUT</span><span class="cut-item__use">nuar, tranç, kontrnuar, yumurta</span></span></button></li>
+          <li><button class="cut-item" type="button" data-c="8" aria-pressed="false"><span class="cut-item__n">8</span><span class="cut-item__text"><span class="cut-item__name">DÖŞ</span><span class="cut-item__use">döner, haşlama, kıyma</span></span></button></li>
+          <li><button class="cut-item" type="button" data-c="9" aria-pressed="false"><span class="cut-item__n">9</span><span class="cut-item__text"><span class="cut-item__name">KABURGA</span><span class="cut-item__use">fırın, ızgara kaburga</span></span></button></li>
+          <li><button class="cut-item" type="button" data-c="10" aria-pressed="false"><span class="cut-item__n">10</span><span class="cut-item__text"><span class="cut-item__name">BÖĞÜR (ETEK)</span><span class="cut-item__use">kıyma, dolma içi</span></span></button></li>
+          <li><button class="cut-item" type="button" data-c="11" aria-pressed="false"><span class="cut-item__n">11</span><span class="cut-item__text"><span class="cut-item__name">İNCİK</span><span class="cut-item__use">haşlama, fırın incik, et suyu</span></span></button></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 ÜRÜNLER -->
+  <section class="section urunler" id="urunler" aria-labelledby="urunler-baslik">
+    <div class="container section__inner">
+      <div class="section-head">
+        <div class="section-head__title">
+          <p class="label">03 — ÜRÜNLER</p>
+          <h2 class="h-section" id="urunler-baslik">KARKAS DA VAR,<br>PARÇA DA.</h2>
+        </div>
+        <a class="btn btn--outline" href="#teklif">
+          TÜM LİSTEYİ İSTE
+          <svg class="icon icon--bold" width="22" height="22" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
+      </div>
+
+      <div class="prod-group">
+        <div class="prod-group__head">
+          <h3 class="prod-group__title">DANA</h3>
+          <span class="prod-group__rule" aria-hidden="true"></span>
+        </div>
+        <ul class="prod-grid">
+          <li>
+            <a class="prod" href="#teklif">
+              <span class="ph prod__ph">
+                <span class="ph__label" aria-hidden="true">FOTOĞRAF · 4:5</span>
+                <img src="assets/img/urun/dana-karkas.jpg" alt="Soğuk odada kancalara asılı iki yarım dana karkas" width="1200" height="1500" loading="lazy">
+              </span>
+              <span class="prod__row">
+                <span class="prod__name">DANA KARKAS</span>
+                <svg class="icon prod__arrow" width="26" height="26" aria-hidden="true"><use href="#i-arrow"/></svg>
+              </span>
+              <span class="prod__meta">BÜTÜN · YARIM · ÇEYREK</span>
+            </a>
+          </li>
+          <li>
+            <a class="prod" href="#teklif">
+              <span class="ph prod__ph"><span class="ph__label" aria-hidden="true">FOTOĞRAF · 4:5</span><img src="assets/img/urun/dana-antrikot.jpg" alt="Kara arduvaz üzerinde bütün dana antrikot ve kesilmiş iki dilim" width="1200" height="1500" loading="lazy"></span>
+              <span class="prod__row">
+                <span class="prod__name">DANA ANTRİKOT</span>
+                <svg class="icon prod__arrow" width="26" height="26" aria-hidden="true"><use href="#i-arrow"/></svg>
+              </span>
+              <span class="prod__meta">TAZE · DONUK</span>
+            </a>
+          </li>
+          <li>
+            <a class="prod" href="#teklif">
+              <span class="ph prod__ph"><span class="ph__label" aria-hidden="true">FOTOĞRAF · 4:5</span><img src="assets/img/urun/dana-bonfile.jpg" alt="Kara arduvaz üzerinde bütün dana bonfile" width="1200" height="1500" loading="lazy"></span>
+              <span class="prod__row">
+                <span class="prod__name">DANA BONFİLE</span>
+                <svg class="icon prod__arrow" width="26" height="26" aria-hidden="true"><use href="#i-arrow"/></svg>
+              </span>
+              <span class="prod__meta">TAZE · DONUK</span>
+            </a>
+          </li>
+          <li>
+            <a class="prod" href="#teklif">
+              <span class="ph prod__ph"><span class="ph__label" aria-hidden="true">FOTOĞRAF · 4:5</span><img src="assets/img/urun/dana-kontrafile.jpg" alt="Kara arduvaz üzerinde dana kontrafile ve kesilmiş dilimler" width="1200" height="1500" loading="lazy"></span>
+              <span class="prod__row">
+                <span class="prod__name">DANA KONTRAFİLE</span>
+                <svg class="icon prod__arrow" width="26" height="26" aria-hidden="true"><use href="#i-arrow"/></svg>
+              </span>
+              <span class="prod__meta">TAZE · DONUK</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="prod-group">
+        <div class="prod-group__head">
+          <h3 class="prod-group__title">KUZU</h3>
+          <span class="prod-group__rule" aria-hidden="true"></span>
+        </div>
+        <ul class="prod-grid">
+          <li>
+            <a class="prod" href="#teklif">
+              <span class="ph prod__ph"><span class="ph__label" aria-hidden="true">FOTOĞRAF · 4:5</span><img src="assets/img/urun/kuzu-karkas.jpg" alt="Soğuk odada kancaya asılı bütün kuzu karkas" width="1200" height="1500" loading="lazy"></span>
+              <span class="prod__row">
+                <span class="prod__name">KUZU KARKAS</span>
+                <svg class="icon prod__arrow" width="26" height="26" aria-hidden="true"><use href="#i-arrow"/></svg>
+              </span>
+              <span class="prod__meta">BÜTÜN · YARIM</span>
+            </a>
+          </li>
+          <li>
+            <a class="prod" href="#teklif">
+              <span class="ph prod__ph"><span class="ph__label" aria-hidden="true">FOTOĞRAF · 4:5</span><img src="assets/img/urun/kuzu-but.jpg" alt="Kara arduvaz üzerinde kemikli bütün kuzu but" width="1200" height="1500" loading="lazy"></span>
+              <span class="prod__row">
+                <span class="prod__name">KUZU BUT</span>
+                <svg class="icon prod__arrow" width="26" height="26" aria-hidden="true"><use href="#i-arrow"/></svg>
+              </span>
+              <span class="prod__meta">TAZE · DONUK</span>
+            </a>
+          </li>
+          <li>
+            <a class="prod" href="#teklif">
+              <span class="ph prod__ph"><span class="ph__label" aria-hidden="true">FOTOĞRAF · 4:5</span><img src="assets/img/urun/kuzu-kol.jpg" alt="Kara arduvaz üzerinde kemikli kuzu kol" width="1200" height="1500" loading="lazy"></span>
+              <span class="prod__row">
+                <span class="prod__name">KUZU KOL</span>
+                <svg class="icon prod__arrow" width="26" height="26" aria-hidden="true"><use href="#i-arrow"/></svg>
+              </span>
+              <span class="prod__meta">TAZE · DONUK</span>
+            </a>
+          </li>
+          <li>
+            <a class="prod" href="#teklif">
+              <span class="ph prod__ph"><span class="ph__label" aria-hidden="true">FOTOĞRAF · 4:5</span><img src="assets/img/urun/kuzu-gerdan.jpg" alt="Kara arduvaz üzerinde dilimlenmiş kemikli kuzu gerdan" width="1200" height="1500" loading="lazy"></span>
+              <span class="prod__row">
+                <span class="prod__name">KUZU GERDAN</span>
+                <svg class="icon prod__arrow" width="26" height="26" aria-hidden="true"><use href="#i-arrow"/></svg>
+              </span>
+              <span class="prod__meta">TAZE · DONUK</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="other">
+        <p class="label">DİĞER ÜRÜNLER</p>
+        <ul class="tags">
+          <li class="tag">Dana kıyma</li>
+          <li class="tag">Dana kuşbaşı</li>
+          <li class="tag">Yaprak döner eti</li>
+          <li class="tag">Kuzu pirzola</li>
+          <li class="tag">Dana döş</li>
+          <li class="tag">Sakatat</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 SÜREÇ -->
+  <section class="section section--alt surec" id="surec" aria-labelledby="surec-baslik">
+    <div class="container section__inner">
+      <div class="section-head">
+        <div class="section-head__title">
+          <p class="label">04 — NASIL ÇALIŞIYORUZ</p>
+          <h2 class="h-section" id="surec-baslik">BESİCİDEN MUTFAĞINIZA,<br><span class="accent">BEŞ ADIM.</span></h2>
+        </div>
+      </div>
+
+      <ol class="steps">
+        <li class="step">
+          <span class="step__num" aria-hidden="true">01</span>
+          <h3 class="step__title">TEDARİK</h3>
+          <p class="step__text">Besiciden seçilen dana ve kuzu.</p>
+        </li>
+        <li class="step">
+          <span class="step__num" aria-hidden="true">02</span>
+          <h3 class="step__title">KESİM</h3>
+          <p class="step__text">Onaylı kesimhanede, veteriner hekim kontrolünde.</p>
+        </li>
+        <li class="step">
+          <span class="step__num" aria-hidden="true">03</span>
+          <h3 class="step__title">PARÇALAMA</h3>
+          <p class="step__text">Siparişe göre karkas, parça ya da porsiyon.</p>
+        </li>
+        <li class="step">
+          <span class="step__num" aria-hidden="true">04</span>
+          <h3 class="step__title">SOĞUK ZİNCİR</h3>
+          <p class="step__text">Taze ürün 0–4 °C, donuk ürün −18 °C.</p>
+        </li>
+        <li class="step">
+          <span class="step__num" aria-hidden="true">05</span>
+          <h3 class="step__title">TESLİMAT</h3>
+          <p class="step__text">Frigorifik araçla işletmenizin kapısına.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 05 SERTİFİKALAR -->
+  <section class="section section--muted sertifikalar" id="sertifikalar" aria-labelledby="sertifikalar-baslik">
+    <div class="container section__inner">
+      <div class="section-head">
+        <div class="section-head__title">
+          <p class="label">05 — SERTİFİKALAR</p>
+          <h2 class="h-section" id="sertifikalar-baslik">BELGESİ OLAN ET.</h2>
+        </div>
+        <div class="section-head__side">
+          <p class="section-head__aside">Belgelerimizin tamamı açık. Karta tıklayın, taranmış aslını büyük görün ya da PDF olarak indirin.</p>
+          <a class="btn btn--outline" href="#sertifikalar">
+            TÜM BELGELER
+            <svg class="icon icon--bold" width="22" height="22" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Belge kartı eklemek/çıkarmak için bir <article class="doc"> bloğunu kopyalayın ya da silin.
+           Sıra numarası ve eğim kendiliğinden gelir. data-src: büyük görünüm için görsel, data-pdf: indirme bağlantısı. -->
+      <div class="docs">
+        <article class="doc" data-src="" data-pdf="">
+          <div class="ph doc__scan">
+            <span class="ph__label" aria-hidden="true"><b>BELGE TARAMASI</b><span>PDF / JPG</span></span>
+            <!-- Tarama gelince: <img src="assets/img/belge/helal.jpg" alt="" width="600" height="800" loading="lazy"> -->
+            <span class="doc__badge" aria-hidden="true"></span>
+          </div>
+          <h3 class="doc__title">HELAL BELGESİ</h3>
+          <dl class="doc__meta">
+            <div><dt>Veren kurum</dt><dd>[KURUM]</dd></div>
+            <div><dt>Belge no</dt><dd>[NO]</dd></div>
+            <div><dt>Geçerlilik</dt><dd>[TARİH]</dd></div>
+          </dl>
+          <button class="doc__open" type="button">Belgeyi görüntüle →</button>
+        </article>
+        <article class="doc" data-src="" data-pdf="">
+          <div class="ph doc__scan">
+            <span class="ph__label" aria-hidden="true"><b>BELGE TARAMASI</b><span>PDF / JPG</span></span>
+            <span class="doc__badge" aria-hidden="true"></span>
+          </div>
+          <h3 class="doc__title">ISO 22000</h3>
+          <dl class="doc__meta">
+            <div><dt>Veren kurum</dt><dd>[KURUM]</dd></div>
+            <div><dt>Belge no</dt><dd>[NO]</dd></div>
+            <div><dt>Geçerlilik</dt><dd>[TARİH]</dd></div>
+          </dl>
+          <button class="doc__open" type="button">Belgeyi görüntüle →</button>
+        </article>
+        <article class="doc" data-src="" data-pdf="">
+          <div class="ph doc__scan">
+            <span class="ph__label" aria-hidden="true"><b>BELGE TARAMASI</b><span>PDF / JPG</span></span>
+            <span class="doc__badge" aria-hidden="true"></span>
+          </div>
+          <h3 class="doc__title">HACCP</h3>
+          <dl class="doc__meta">
+            <div><dt>Veren kurum</dt><dd>[KURUM]</dd></div>
+            <div><dt>Belge no</dt><dd>[NO]</dd></div>
+            <div><dt>Geçerlilik</dt><dd>[TARİH]</dd></div>
+          </dl>
+          <button class="doc__open" type="button">Belgeyi görüntüle →</button>
+        </article>
+        <article class="doc" data-src="" data-pdf="">
+          <div class="ph doc__scan">
+            <span class="ph__label" aria-hidden="true"><b>BELGE TARAMASI</b><span>PDF / JPG</span></span>
+            <span class="doc__badge" aria-hidden="true"></span>
+          </div>
+          <h3 class="doc__title">İŞLETME ONAY BELGESİ</h3>
+          <dl class="doc__meta">
+            <div><dt>Veren kurum</dt><dd>[KURUM]</dd></div>
+            <div><dt>Belge no</dt><dd>[NO]</dd></div>
+            <div><dt>Geçerlilik</dt><dd>[TARİH]</dd></div>
+          </dl>
+          <button class="doc__open" type="button">Belgeyi görüntüle →</button>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 REFERANSLAR -->
+  <section class="section referanslar" id="referanslar" aria-labelledby="referanslar-baslik">
+    <div class="container section__inner">
+      <div class="section-head">
+        <div class="section-head__title">
+          <p class="label">06 — REFERANSLAR</p>
+          <h2 class="h-section h-section--sm" id="referanslar-baslik">ETİNİ BİZDEN ALAN MUTFAKLAR</h2>
+        </div>
+      </div>
+      <ul class="refs">
+        <li class="ref"><span class="ref__label">[MÜŞTERİ LOGOSU]</span></li>
+        <li class="ref"><span class="ref__label">[MÜŞTERİ LOGOSU]</span></li>
+        <li class="ref"><span class="ref__label">[MÜŞTERİ LOGOSU]</span></li>
+        <li class="ref"><span class="ref__label">[MÜŞTERİ LOGOSU]</span></li>
+        <li class="ref"><span class="ref__label">[MÜŞTERİ LOGOSU]</span></li>
+        <li class="ref"><span class="ref__label">[MÜŞTERİ LOGOSU]</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 07 TEKLİF -->
+  <section class="section quote" id="teklif" aria-labelledby="teklif-baslik" data-quote>
+    <div class="container quote__inner">
+      <div class="quote__text">
+        <p class="label">07 — TEKLİF AL</p>
+        <h2 class="h-section quote__title" id="teklif-baslik">HAFTALIK<br>ET LİSTENİZİ<br>GÖNDERİN.</h2>
+        <p class="quote__lead">Hangi üründen ne kadar gerektiğini yazın; fiyat ve teslimat günüyle size dönelim.</p>
+        <div class="btn-row">
+          <a class="btn btn--white btn--quote" href="#teklif-formu" data-site-href="whatsapp">
+            <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#i-chat"/></svg>
+            WHATSAPP'TAN YAZ
+          </a>
+          <a class="btn btn--ghost-light btn--quote" href="#teklif-formu" data-site-href="telefon">
+            <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#i-phone"/></svg>
+            <span data-site="telefon">[TELEFON]</span>
+          </a>
+        </div>
+      </div>
+
+      <form class="quote-form" id="teklif-formu" aria-labelledby="teklif-baslik" novalidate data-quote-form>
+        <div class="quote-form__grid">
+          <div class="field">
+            <label class="field__label" for="f-isletme">İŞLETME ADI</label>
+            <input class="field__input" id="f-isletme" name="isletme" type="text" autocomplete="organization" required aria-describedby="f-isletme-hata">
+            <p class="field__error" id="f-isletme-hata" hidden></p>
+          </div>
+          <div class="field">
+            <label class="field__label" for="f-yetkili">YETKİLİ</label>
+            <input class="field__input" id="f-yetkili" name="yetkili" type="text" autocomplete="name">
+          </div>
+          <div class="field">
+            <label class="field__label" for="f-telefon">TELEFON</label>
+            <input class="field__input" id="f-telefon" name="telefon" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="f-telefon-hata">
+            <p class="field__error" id="f-telefon-hata" hidden></p>
+          </div>
+          <div class="field">
+            <label class="field__label" for="f-tur">İŞLETME TÜRÜ</label>
+            <select class="field__input" id="f-tur" name="tur">
+              <option>Restoran / Steakhouse</option>
+              <option>Otel / Catering</option>
+              <option>Dönerci / Köfteci</option>
+              <option>Market / Kasap</option>
+              <option>Diğer</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field__label" for="f-liste">ÜRÜN VE MİKTAR</label>
+          <textarea class="field__input" id="f-liste" name="liste" rows="4" placeholder="Örn. 40 kg dana antrikot, 2 kuzu karkas — haftalık" required aria-describedby="f-liste-hata"></textarea>
+          <p class="field__error" id="f-liste-hata" hidden></p>
+        </div>
+        <button class="btn btn--ink" type="submit">
+          TEKLİF İSTE
+          <svg class="icon icon--bold" width="24" height="24" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </button>
+        <p class="quote-form__status" role="status" data-form-status></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ALT BİLGİ -->
+<footer class="site-footer">
+  <div class="container site-footer__top">
+    <div class="site-footer__brand">
+      <img class="site-footer__logo" src="assets/img/efeler-logo.png" alt="Efeler Kasap Izgara logosu" width="132" height="127" loading="lazy">
+      <p>Restoran, otel, catering ve marketlere toptan dana ve kuzu eti.</p>
+    </div>
+    <nav class="site-footer__col" aria-labelledby="alt-menu-baslik">
+      <p class="site-footer__title" id="alt-menu-baslik">MENÜ</p>
+      <a class="foot-link" href="#kime">Kime Hizmet</a>
+      <a class="foot-link" href="#kesim">Kesim Şeması</a>
+      <a class="foot-link" href="#urunler">Ürünler</a>
+      <a class="foot-link" href="#surec">Süreç</a>
+    </nav>
+    <nav class="site-footer__col" aria-labelledby="alt-kurumsal-baslik">
+      <p class="site-footer__title" id="alt-kurumsal-baslik">KURUMSAL</p>
+      <a class="foot-link" href="#top">Hakkımızda</a>
+      <a class="foot-link" href="#sertifikalar">Sertifikalar</a>
+      <a class="foot-link" href="#referanslar">Referanslar</a>
+      <a class="foot-link" href="#teklif">Teklif Al</a>
+    </nav>
+    <address class="site-footer__col site-footer__contact">
+      <p class="site-footer__title">İLETİŞİM</p>
+      <span data-site="adres">[ADRES]</span>
+      <a data-site="telefon" data-site-href="telefon">[TELEFON]</a>
+      <a data-site="eposta" data-site-href="eposta">[E-POSTA]</a>
+      <span class="site-footer__hours" data-site="calismaSaatleri">[ÇALIŞMA SAATLERİ]</span>
+    </address>
+  </div>
+
+  <div class="site-footer__bleed" aria-hidden="true">EFELER</div>
+
+  <div class="site-footer__bottom">
+    <div class="container site-footer__bottom-inner">
+      <span>© 2026 Efeler. Tüm hakları saklıdır.</span>
+      <div class="site-footer__social">
+        <a class="bar-link" href="#top" data-site-href="instagram">INSTAGRAM</a>
+        <a class="bar-link" href="#top" data-site-href="facebook">FACEBOOK</a>
+        <a class="bar-link" href="#top">KVKK</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Sabit WhatsApp butonu: kapak geçilince belirir, teklif bölümünde gizlenir -->
+<a class="wa-float" href="#teklif" data-site-href="whatsapp" aria-label="WhatsApp'tan yazın" data-wa-float>
+  <svg class="icon" width="28" height="28" aria-hidden="true"><use href="#i-chat"/></svg>
+</a>
+
+<!-- Belge büyütme -->
+<dialog class="doc-dialog" aria-labelledby="belge-baslik" data-doc-dialog>
+  <div class="doc-dialog__box">
+    <div class="doc-dialog__head">
+      <h2 class="doc-dialog__title" id="belge-baslik" data-doc-title>BELGE</h2>
+      <button class="doc-dialog__close" type="button" aria-label="Kapat" data-doc-close>
+        <svg class="icon icon--bold" width="24" height="24" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+    <div class="ph doc__scan doc-dialog__scan" data-doc-scan>
+      <span class="ph__label" aria-hidden="true"><b>BELGE TARAMASI</b><span data-doc-name></span></span>
+    </div>
+    <a class="btn btn--outline doc-dialog__pdf" href="#sertifikalar" download hidden data-doc-pdf>PDF OLARAK İNDİR</a>
+  </div>
+</dialog>
+
+</body>
+</html>
