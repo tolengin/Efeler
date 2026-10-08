@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Efeler Toptan Et — Toptan Dana ve Kuzu Eti</title>
-<meta name="description" content="Restoran, otel, catering ve marketler için toptan dana ve kuzu eti. Karkas ya da parça, taze ya da donuk.">
+<title>Efeler Toptan Et — Toptan Dana, Kuzu ve Tavuk Eti · İstanbul</title>
+<meta name="description" content="İstanbul Avrupa ve Anadolu Yakası'nda restoran, otel, catering ve marketlere toptan dana, kuzu ve tavuk eti; köfte ve döner.">
 <meta name="theme-color" content="#1A1B16">
 <!-- TASLAK: müşteri onayı süresince arama motorları dizine eklemesin. Yayına çıkarken bu satırı kaldırın. -->
 <meta name="robots" content="noindex, nofollow">
@@ -12,20 +12,23 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:site_name" content="Efeler Toptan Et">
-<meta property="og:title" content="Efeler Toptan Et — Toptan Dana ve Kuzu Eti">
-<meta property="og:description" content="Restoran, otel, catering ve marketler için toptan dana ve kuzu eti. Karkas ya da parça, taze ya da donuk.">
+<meta property="og:title" content="Efeler Toptan Et — Toptan Dana, Kuzu ve Tavuk Eti · İstanbul">
+<meta property="og:description" content="İstanbul Avrupa ve Anadolu Yakası'nda restoran, otel, catering ve marketlere toptan dana, kuzu ve tavuk eti; köfte ve döner.">
 <!-- Alan adı belli olunca tam adres yapın: https://.../assets/img/efeler-logo.png -->
 <meta property="og:image" content="assets/img/efeler-logo.png">
-<meta property="og:image:width" content="900">
-<meta property="og:image:height" content="868">
-<meta property="og:image:alt" content="Efeler Kasap Izgara logosu">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="1460">
+<meta property="og:image:alt" content="Efeler Toptan Et logosu">
 
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<!-- Kapakta ilk görünen yazı tipleri önceden yüklenir (Big Shoulders Display 900: başlık, Hanken Grotesk 400: metin).
+     Her biri latin + latin-ext: başlıktaki İ, Ş ve menüdeki Ş latin-ext dosyasında. Diğerleri style.css'teki @font-face'ten. -->
+<link rel="preload" href="assets/fonts/big-shoulders-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/big-shoulders-display-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/hanken-grotesk-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
 
 <!-- İlk boyamadan önce: tema (kayıtlı tercih, yoksa cihaz ayarı) ve JS sınıfı -->
@@ -33,6 +36,99 @@
 <script src="assets/js/main.js" defer></script>
 </head>
 <body id="top">
+
+<!-- AÇILIŞ PERDESİ: oturumda bir kez. Kırmızı perde ortadan ikiye bölünüp açılır; amblem sol perdenin
+     sağ kenarına yapışık, onunla tek parça çıkar. Davranış hemen alttaki betikte.
+     JavaScript kapalıysa perde hiç görünmez; hata ya da yavaş yüklemede en geç 4 sn'de açılır. -->
+<div class="splash" aria-hidden="true" data-splash>
+  <div class="splash__side splash__side--left">
+    <div class="splash__panel"></div>
+    <div class="splash__logo-box"><img class="splash__logo" data-src="assets/img/efeler-amblem-beyaz.svg" alt="" width="941" height="755"></div>
+  </div>
+  <div class="splash__side splash__side--right"></div>
+</div>
+<script>
+(function (d, w) {
+  var root = d.documentElement;
+  var el = d.querySelector('[data-splash]');
+  var KEY = 'efeler-acilis';
+  var HOLD = 1200;     // amblem 0.4 sn'de belirir, en az 0.8 sn tam görünür kalır
+  var LIMIT = 4000;    // sayfa bu sürede yüklenmezse de açılır
+  var seen, opened = false, loaded = false, logoAt = 0;
+
+  try { seen = w.sessionStorage.getItem(KEY); } catch (e) {}
+  if (seen || !el) {
+    if (el) el.parentNode.removeChild(el);
+    // Perde yok: sayfa, kapak yazı tipleri hazır olana kadar en çok 300 ms görünmez kalır (yedek yazı tipi görünmesin)
+    var fonts = d.fonts;
+    if (fonts && fonts.load && w.Promise) {
+      var show = function () { root.classList.remove('fonts-wait'); };
+      root.classList.add('fonts-wait');
+      w.setTimeout(show, 300);
+      try {
+        w.Promise.all([
+          fonts.load('900 1em "Big Shoulders Display"', 'Aİ'),
+          fonts.load('400 1em "Hanken Grotesk"', 'aş')
+        ]).then(show, show);
+      } catch (e) { show(); }
+    }
+    return;
+  }
+
+  function open() {
+    if (opened) return;
+    opened = true;
+    var reduce = w.matchMedia && w.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    root.classList.add('splash-open');
+    // Geçiş bitince katman kaldırılır, kaydırma serbest kalır (transitionend'e güvenilmez)
+    w.setTimeout(function () {
+      if (el.parentNode) el.parentNode.removeChild(el);
+      root.classList.remove('splash-on');
+    }, reduce ? 350 : 950);
+  }
+
+  function check() {
+    if (opened || !loaded || !logoAt) return;
+    var wait = logoAt + HOLD - Date.now();
+    if (wait > 0) w.setTimeout(check, wait);
+    else open();
+  }
+
+  w.setTimeout(open, LIMIT);
+  root.classList.add('splash-on');
+  try {
+    w.sessionStorage.setItem(KEY, '1');
+  } catch (e) {}
+  try {
+    var logo = el.getElementsByTagName('img')[0];
+    logo.onload = function () {
+      logoAt = Date.now();
+      root.classList.add('splash-logo');
+      check();
+    };
+    logo.onerror = function () {
+      logoAt = Date.now() - HOLD;
+      check();
+    };
+    logo.src = logo.getAttribute('data-src');
+    // Sayfa yüklenince yazı tiplerini de bekle (yedek yazı tipi perdenin arkasında kalsın)
+    w.addEventListener('load', function () {
+      var fonts = d.fonts;
+      if (fonts && fonts.ready && fonts.status !== 'loaded') {
+        fonts.ready.then(function () {
+          loaded = true;
+          check();
+        });
+      } else {
+        loaded = true;
+        check();
+      }
+    });
+  } catch (e) {
+    open();
+  }
+})(document, window);
+</script>
 
 <!-- Çizgi ikonlar: <svg><use href="#i-..."></use></svg> ile kullanılır -->
 <svg class="sprite" aria-hidden="true" focusable="false">
@@ -50,11 +146,11 @@
 <!-- ÜST BİLGİ ŞERİDİ (sabitlenmez) -->
 <aside class="topbar" aria-label="Hızlı iletişim">
   <div class="container topbar__inner">
-    <span>TOPTAN DANA &amp; KUZU ETİ — RESTORAN · OTEL · CATERING · MARKET</span>
+    <span>TOPTAN DANA, KUZU &amp; TAVUK — RESTORAN · OTEL · CATERING · MARKET</span>
     <div class="topbar__contact">
-      <span data-site="calismaSaatleri" data-upper>[ÇALIŞMA SAATLERİ]</span>
-      <a class="bar-link" href="#teklif" data-site="telefon" data-site-href="telefon">[TELEFON]</a>
-      <a class="bar-link" href="#teklif" data-site-href="whatsapp">WHATSAPP</a>
+      <span data-site="calismaSaatleri" data-upper>06:00 – 17:00</span>
+      <a class="bar-link" href="tel:+905303422540" data-site="telefon" data-site-href="telefon">0530 342 25 40</a>
+      <a class="bar-link" href="https://wa.me/905303422540?text=Merhaba%2C%20teklif%20almak%20istiyorum." target="_blank" rel="noopener" data-site-href="whatsapp">WHATSAPP</a>
     </div>
   </div>
 </aside>
@@ -64,7 +160,9 @@
   <div class="container site-header__inner">
     <div class="site-header__row">
       <a class="brand" href="#top" aria-label="Efeler ana sayfa">
-        <img class="brand__logo" src="assets/img/efeler-logo.png" alt="Efeler Kasap Izgara logosu" width="76" height="73">
+        <!-- Temaya göre biri görünür: açık zeminde renkli, koyu zeminde beyaz satırlı amblem -->
+        <img class="brand__logo only-light" src="assets/img/efeler-amblem.svg" alt="Efeler Toptan Et logosu" width="941" height="755" loading="lazy">
+        <img class="brand__logo only-dark" src="assets/img/efeler-amblem-koyu.svg" alt="Efeler Toptan Et logosu" width="941" height="755" loading="lazy">
         <span class="brand__text" aria-hidden="true">
           <span class="brand__name">EFELER</span>
           <span class="brand__sub">TOPTAN ET</span>
@@ -104,10 +202,10 @@
       <div class="hero__text">
         <p class="hero__eyebrow">
           <span class="hero__rule" aria-hidden="true"></span>
-          <span>TOPTAN ET TEDARİKÇİSİ · <span data-site="sehir" data-upper>[ŞEHİR]</span></span>
+          <span>TOPTAN ET TEDARİKÇİSİ · <span data-site="sehir" data-upper>İSTANBUL</span></span>
         </p>
         <h1 class="hero__title" id="kapak-baslik">TOPTAN ET,<br><span class="accent">USTA İŞİ</span><br>KESİM.</h1>
-        <p class="hero__lead">Restoran, otel, catering ve marketler için dana ve kuzu. Karkas ya da parça, taze ya da donuk; listenizi gönderin, fiyatını verelim.</p>
+        <p class="hero__lead">Restoran, otel, catering ve marketler için dana, kuzu ve tavuk; köfte ve döner. Bütün ya da parça, taze ya da donuk; listenizi gönderin, fiyatını verelim.</p>
         <div class="btn-row">
           <a class="btn btn--red btn--lg" href="#teklif">
             TEKLİF AL
@@ -131,12 +229,12 @@
           <svg class="stamp" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
             <defs><path id="stampArc" d="M 100,100 m -76,0 a 76,76 0 1,1 152,0 a 76,76 0 1,1 -152,0"/></defs>
             <circle class="stamp__disc" cx="100" cy="100" r="99"/>
-            <text class="stamp__ring"><textPath href="#stampArc">DANA · KUZU · KARKAS · PARÇA · TAZE · DONUK · </textPath></text>
+            <text class="stamp__ring"><textPath href="#stampArc">DANA · KUZU · TAVUK · KÖFTE · DÖNER · </textPath></text>
             <circle class="stamp__inner" cx="100" cy="100" r="56"/>
             <text class="stamp__top" x="100" y="94">TOPTAN</text>
             <text class="stamp__et" x="100" y="130">ET</text>
           </svg>
-          <img class="hero__sticker" src="assets/img/efeler-logo.png" alt="" width="900" height="868">
+          <img class="hero__sticker" src="assets/img/efeler-amblem.svg" alt="" width="941" height="755">
         </div>
       </div>
     </div>
@@ -145,15 +243,16 @@
       <dl class="facts">
         <div class="facts__item">
           <dt>KURULUŞ</dt>
-          <dd data-site="kurulusYili" data-upper>[YIL]</dd>
+          <dd data-site="kurulusYili" data-upper>2023</dd>
         </div>
         <div class="facts__item">
           <dt>GÜNLÜK KAPASİTE</dt>
-          <dd data-site="gunlukKapasite" data-upper>[TON / GÜN]</dd>
+          <dd data-site="gunlukKapasite" data-upper>1 TON</dd>
         </div>
         <div class="facts__item">
           <dt>TESLİMAT BÖLGESİ</dt>
-          <dd data-site="teslimatBolgesi" data-upper>[İLLER]</dd>
+          <dd data-site="teslimatBolgesi" data-upper>İSTANBUL</dd>
+          <dd class="facts__note" data-site="teslimatAyrinti" data-upper>AVRUPA &amp; ANADOLU YAKASI</dd>
         </div>
         <div class="facts__item">
           <dt>ÜRÜN FORMU</dt>
@@ -167,26 +266,30 @@
   <div class="ticker" aria-hidden="true">
     <div class="ticker__track">
       <div class="ticker__group">
-        <span>DANA KARKAS</span><span class="ticker__dot"></span>
+        <span>DANA BONFİLE</span><span class="ticker__dot"></span>
         <span>ANTRİKOT</span><span class="ticker__dot"></span>
-        <span>BONFİLE</span><span class="ticker__dot"></span>
-        <span>KONTRAFİLE</span><span class="ticker__dot"></span>
-        <span>KUZU BUT</span><span class="ticker__dot"></span>
-        <span>KUZU GERDAN</span><span class="ticker__dot"></span>
-        <span>KIYMA</span><span class="ticker__dot"></span>
-        <span>KUŞBAŞI</span><span class="ticker__dot"></span>
-        <span>YAPRAK DÖNER</span><span class="ticker__dot"></span>
+        <span>T-BONE</span><span class="ticker__dot"></span>
+        <span>DALLAS</span><span class="ticker__dot"></span>
+        <span>KIVIRCIK KUZU PİRZOLA</span><span class="ticker__dot"></span>
+        <span>KUZU KÜŞLEME</span><span class="ticker__dot"></span>
+        <span>BÜTÜN KUZU</span><span class="ticker__dot"></span>
+        <span>TAVUK BAGET</span><span class="ticker__dot"></span>
+        <span>TAVUK KANAT</span><span class="ticker__dot"></span>
+        <span>KÖFTE</span><span class="ticker__dot"></span>
+        <span>ET DÖNER</span><span class="ticker__dot"></span>
       </div>
       <div class="ticker__group">
-        <span>DANA KARKAS</span><span class="ticker__dot"></span>
+        <span>DANA BONFİLE</span><span class="ticker__dot"></span>
         <span>ANTRİKOT</span><span class="ticker__dot"></span>
-        <span>BONFİLE</span><span class="ticker__dot"></span>
-        <span>KONTRAFİLE</span><span class="ticker__dot"></span>
-        <span>KUZU BUT</span><span class="ticker__dot"></span>
-        <span>KUZU GERDAN</span><span class="ticker__dot"></span>
-        <span>KIYMA</span><span class="ticker__dot"></span>
-        <span>KUŞBAŞI</span><span class="ticker__dot"></span>
-        <span>YAPRAK DÖNER</span><span class="ticker__dot"></span>
+        <span>T-BONE</span><span class="ticker__dot"></span>
+        <span>DALLAS</span><span class="ticker__dot"></span>
+        <span>KIVIRCIK KUZU PİRZOLA</span><span class="ticker__dot"></span>
+        <span>KUZU KÜŞLEME</span><span class="ticker__dot"></span>
+        <span>BÜTÜN KUZU</span><span class="ticker__dot"></span>
+        <span>TAVUK BAGET</span><span class="ticker__dot"></span>
+        <span>TAVUK KANAT</span><span class="ticker__dot"></span>
+        <span>KÖFTE</span><span class="ticker__dot"></span>
+        <span>ET DÖNER</span><span class="ticker__dot"></span>
       </div>
     </div>
   </div>
@@ -215,7 +318,7 @@
           <a class="seg-row" href="#teklif">
             <span class="seg-row__num">02</span>
             <span class="seg-row__title">OTEL &amp; CATERING</span>
-            <span class="seg-row__desc">Kuşbaşı, kıyma, rosto ve haşlamalık; haftalık plana göre düzenli sevkiyat.</span>
+            <span class="seg-row__desc">Dana ve tavuk kuşbaşı, et sote, kıyma, tavuk but ve göğüs; haftalık plana göre düzenli sevkiyat.</span>
             <svg class="icon" width="30" height="30" aria-hidden="true"><use href="#i-arrow"/></svg>
           </a>
         </li>
@@ -223,7 +326,7 @@
           <a class="seg-row" href="#teklif">
             <span class="seg-row__num">03</span>
             <span class="seg-row__title">DÖNERCİ &amp; KÖFTECİ</span>
-            <span class="seg-row__desc">Yaprak döner eti, köftelik ve lahmacunluk kıyma; yağ oranı sizin tarifinize göre.</span>
+            <span class="seg-row__desc">Et döner, tavuk döner, dönerlik tavuk, köftelik kıyma; yağ oranı sizin tarifinize göre.</span>
             <svg class="icon" width="30" height="30" aria-hidden="true"><use href="#i-arrow"/></svg>
           </a>
         </li>
@@ -231,7 +334,7 @@
           <a class="seg-row" href="#teklif">
             <span class="seg-row__num">04</span>
             <span class="seg-row__title">MARKET &amp; KASAP</span>
-            <span class="seg-row__desc">Dana ve kuzu karkas, çeyrek ve set ürünler; reyona hazır parça et.</span>
+            <span class="seg-row__desc">Bütün kuzu, bütün tavuk ve reyona hazır parça et.</span>
             <svg class="icon" width="30" height="30" aria-hidden="true"><use href="#i-arrow"/></svg>
           </a>
         </li>
@@ -320,122 +423,102 @@
           <h2 class="h-section" id="urunler-baslik">KARKAS DA VAR,<br>PARÇA DA.</h2>
         </div>
         <a class="btn btn--outline" href="#teklif">
-          TÜM LİSTEYİ İSTE
+          FİYAT İSTE
           <svg class="icon icon--bold" width="22" height="22" aria-hidden="true"><use href="#i-arrow"/></svg>
         </a>
       </div>
 
-      <div class="prod-group">
-        <div class="prod-group__head">
-          <h3 class="prod-group__title">DANA</h3>
-          <span class="prod-group__rule" aria-hidden="true"></span>
-        </div>
-        <ul class="prod-grid">
-          <li>
-            <a class="prod" href="#teklif">
-              <span class="ph prod__ph">
-                <span class="ph__label" aria-hidden="true">FOTOĞRAF · 4:5</span>
-                <img src="assets/img/urun/dana-karkas.jpg" alt="Soğuk odada kancalara asılı iki yarım dana karkas" width="1200" height="1500" loading="lazy">
-              </span>
-              <span class="prod__row">
-                <span class="prod__name">DANA KARKAS</span>
-                <svg class="icon prod__arrow" width="26" height="26" aria-hidden="true"><use href="#i-arrow"/></svg>
-              </span>
-              <span class="prod__meta">BÜTÜN · YARIM · ÇEYREK</span>
-            </a>
-          </li>
-          <li>
-            <a class="prod" href="#teklif">
-              <span class="ph prod__ph"><span class="ph__label" aria-hidden="true">FOTOĞRAF · 4:5</span><img src="assets/img/urun/dana-antrikot.jpg" alt="Kara arduvaz üzerinde bütün dana antrikot ve kesilmiş iki dilim" width="1200" height="1500" loading="lazy"></span>
-              <span class="prod__row">
-                <span class="prod__name">DANA ANTRİKOT</span>
-                <svg class="icon prod__arrow" width="26" height="26" aria-hidden="true"><use href="#i-arrow"/></svg>
-              </span>
-              <span class="prod__meta">TAZE · DONUK</span>
-            </a>
-          </li>
-          <li>
-            <a class="prod" href="#teklif">
-              <span class="ph prod__ph"><span class="ph__label" aria-hidden="true">FOTOĞRAF · 4:5</span><img src="assets/img/urun/dana-bonfile.jpg" alt="Kara arduvaz üzerinde bütün dana bonfile" width="1200" height="1500" loading="lazy"></span>
-              <span class="prod__row">
-                <span class="prod__name">DANA BONFİLE</span>
-                <svg class="icon prod__arrow" width="26" height="26" aria-hidden="true"><use href="#i-arrow"/></svg>
-              </span>
-              <span class="prod__meta">TAZE · DONUK</span>
-            </a>
-          </li>
-          <li>
-            <a class="prod" href="#teklif">
-              <span class="ph prod__ph"><span class="ph__label" aria-hidden="true">FOTOĞRAF · 4:5</span><img src="assets/img/urun/dana-kontrafile.jpg" alt="Kara arduvaz üzerinde dana kontrafile ve kesilmiş dilimler" width="1200" height="1500" loading="lazy"></span>
-              <span class="prod__row">
-                <span class="prod__name">DANA KONTRAFİLE</span>
-                <svg class="icon prod__arrow" width="26" height="26" aria-hidden="true"><use href="#i-arrow"/></svg>
-              </span>
-              <span class="prod__meta">TAZE · DONUK</span>
-            </a>
-          </li>
-        </ul>
-      </div>
+      <!-- ÜRÜN LİSTESİ (README'de "Ürün ekleme ve çıkarma" ile "Bir ürüne fotoğraf bağlama" anlatılıyor)
+           Her grup bir <div class="prod-panel"> bloğu; JavaScript grupları sekmeye çevirir.
+           Sekme adı grubun başlığından gelir. Sıra numaraları ve sekmedeki ürün sayısı kendiliğinden güncellenir.
+           Ürün: bir <li> satırı, adı BÜYÜK HARFLE. Fotoğraflı ürün: <li data-foto="assets/img/urun/dosya-adi.jpg">.
+           Grubun kapak fotoğrafı .prod-photo içindeki <img>; dosya henüz yoksa yerinde yer tutucu görünür.
+           FİYAT YAZMAYIN: firma sitede fiyat istemiyor. -->
+      <div class="prod-tabs" data-prod-tabs>
 
-      <div class="prod-group">
-        <div class="prod-group__head">
-          <h3 class="prod-group__title">KUZU</h3>
-          <span class="prod-group__rule" aria-hidden="true"></span>
+        <div class="prod-panel" id="urun-dana">
+          <h3 class="prod-panel__title">DANA</h3>
+          <div class="ph ph--under prod-photo">
+            <span class="ph__label" aria-hidden="true"><b>[DANA FOTOĞRAFI]</b></span>
+            <img src="assets/img/urun/dana-antrikot.jpg" alt="" width="1200" height="1500" loading="lazy">
+          </div>
+          <ol class="prod-list">
+            <li data-foto="assets/img/urun/dana-bonfile.jpg">DANA BONFİLE</li>
+            <li data-foto="assets/img/urun/dana-sifir-tranc.jpg">DANA SIFIR TEMİZLENMİŞ TRANÇ</li>
+            <li data-foto="assets/img/urun/dana-tranc.jpg">DANA TRANÇ</li>
+            <li data-foto="assets/img/urun/dana-kusbasi.jpg">DANA KUŞBAŞI</li>
+            <li data-foto="assets/img/urun/dana-dos.jpg">DANA DÖŞ</li>
+            <li data-foto="assets/img/urun/et-sote.jpg">ET SOTE</li>
+            <li data-foto="assets/img/urun/kiyma-koftelik.jpg">KIYMA KÖFTELİK</li>
+            <li data-foto="assets/img/urun/kebaplik.jpg">KEBAPLIK</li>
+            <li data-foto="assets/img/urun/dana-kontrafile.jpg">BİFTEK SIFIR TEMİZ (KONTRAFİLE)</li>
+            <li data-foto="assets/img/urun/dana-antrikot.jpg">ANTRİKOT</li>
+            <li data-foto="assets/img/urun/dana-dallas.jpg">DALLAS</li>
+            <li data-foto="assets/img/urun/dana-t-bone.jpg">T-BONE</li>
+          </ol>
         </div>
-        <ul class="prod-grid">
-          <li>
-            <a class="prod" href="#teklif">
-              <span class="ph prod__ph"><span class="ph__label" aria-hidden="true">FOTOĞRAF · 4:5</span><img src="assets/img/urun/kuzu-karkas.jpg" alt="Soğuk odada kancaya asılı bütün kuzu karkas" width="1200" height="1500" loading="lazy"></span>
-              <span class="prod__row">
-                <span class="prod__name">KUZU KARKAS</span>
-                <svg class="icon prod__arrow" width="26" height="26" aria-hidden="true"><use href="#i-arrow"/></svg>
-              </span>
-              <span class="prod__meta">BÜTÜN · YARIM</span>
-            </a>
-          </li>
-          <li>
-            <a class="prod" href="#teklif">
-              <span class="ph prod__ph"><span class="ph__label" aria-hidden="true">FOTOĞRAF · 4:5</span><img src="assets/img/urun/kuzu-but.jpg" alt="Kara arduvaz üzerinde kemikli bütün kuzu but" width="1200" height="1500" loading="lazy"></span>
-              <span class="prod__row">
-                <span class="prod__name">KUZU BUT</span>
-                <svg class="icon prod__arrow" width="26" height="26" aria-hidden="true"><use href="#i-arrow"/></svg>
-              </span>
-              <span class="prod__meta">TAZE · DONUK</span>
-            </a>
-          </li>
-          <li>
-            <a class="prod" href="#teklif">
-              <span class="ph prod__ph"><span class="ph__label" aria-hidden="true">FOTOĞRAF · 4:5</span><img src="assets/img/urun/kuzu-kol.jpg" alt="Kara arduvaz üzerinde kemikli kuzu kol" width="1200" height="1500" loading="lazy"></span>
-              <span class="prod__row">
-                <span class="prod__name">KUZU KOL</span>
-                <svg class="icon prod__arrow" width="26" height="26" aria-hidden="true"><use href="#i-arrow"/></svg>
-              </span>
-              <span class="prod__meta">TAZE · DONUK</span>
-            </a>
-          </li>
-          <li>
-            <a class="prod" href="#teklif">
-              <span class="ph prod__ph"><span class="ph__label" aria-hidden="true">FOTOĞRAF · 4:5</span><img src="assets/img/urun/kuzu-gerdan.jpg" alt="Kara arduvaz üzerinde dilimlenmiş kemikli kuzu gerdan" width="1200" height="1500" loading="lazy"></span>
-              <span class="prod__row">
-                <span class="prod__name">KUZU GERDAN</span>
-                <svg class="icon prod__arrow" width="26" height="26" aria-hidden="true"><use href="#i-arrow"/></svg>
-              </span>
-              <span class="prod__meta">TAZE · DONUK</span>
-            </a>
-          </li>
-        </ul>
-      </div>
 
-      <div class="other">
-        <p class="label">DİĞER ÜRÜNLER</p>
-        <ul class="tags">
-          <li class="tag">Dana kıyma</li>
-          <li class="tag">Dana kuşbaşı</li>
-          <li class="tag">Yaprak döner eti</li>
-          <li class="tag">Kuzu pirzola</li>
-          <li class="tag">Dana döş</li>
-          <li class="tag">Sakatat</li>
-        </ul>
+        <div class="prod-panel" id="urun-kuzu">
+          <h3 class="prod-panel__title">KUZU</h3>
+          <div class="ph ph--under prod-photo">
+            <span class="ph__label" aria-hidden="true"><b>[KUZU FOTOĞRAFI]</b></span>
+            <img src="assets/img/urun/kuzu-karkas.jpg" alt="" width="1200" height="1500" loading="lazy">
+          </div>
+          <ol class="prod-list">
+            <li data-foto="assets/img/urun/kuzu-karkas.jpg">BÜTÜN KUZU</li>
+            <li data-foto="assets/img/urun/kuzu-but.jpg">KUZU BUT</li>
+            <li data-foto="assets/img/urun/kuzu-bosluk.jpg">KUZU BOŞLUK</li>
+            <li data-foto="assets/img/urun/kuyruk-yagi.jpg">KUYRUK YAĞI</li>
+            <li data-foto="assets/img/urun/gomlek-yagi.jpg">GÖMLEK YAĞI</li>
+            <li data-foto="assets/img/urun/kuzu-pirzola.jpg">KIVIRCIK KUZU PİRZOLA</li>
+            <li data-foto="assets/img/urun/kuzu-sis.jpg">KUZU ŞİŞ</li>
+            <li data-foto="assets/img/urun/kuzu-lokum.jpg">KUZU LOKUM</li>
+            <li data-foto="assets/img/urun/kuzu-kusleme.jpg">KUZU KÜŞLEME</li>
+            <li data-foto="assets/img/urun/kuzu-incik.jpg">KUZU İNCİK</li>
+            <li data-foto="assets/img/urun/kuzu-kaburga.jpg">KABURGA</li>
+            <li data-foto="assets/img/urun/kuzu-gerdan.jpg">KUZU GERDAN</li>
+            <li data-foto="assets/img/urun/kuzu-kol.jpg">KUZU KOL</li>
+            <li>KUZU KASKİ</li>
+          </ol>
+        </div>
+
+        <div class="prod-panel" id="urun-tavuk">
+          <h3 class="prod-panel__title">TAVUK</h3>
+          <div class="ph ph--under prod-photo">
+            <span class="ph__label" aria-hidden="true"><b>[TAVUK FOTOĞRAFI]</b></span>
+            <img src="assets/img/urun/tavuk-kapak.jpg" alt="" width="1200" height="1500" loading="lazy">
+          </div>
+          <ol class="prod-list">
+            <li data-foto="assets/img/urun/tavuk-baget.jpg">TAVUK BAGET</li>
+            <li data-foto="assets/img/urun/tavuk-pirzola.jpg">TAVUK PİRZOLA</li>
+            <li data-foto="assets/img/urun/tavuk-spesiyal-but.jpg">TAVUK SPESİYAL BUT</li>
+            <li data-foto="assets/img/urun/tavuk-citir-pirzola.jpg">TAVUK ÇITIR PİRZOLA</li>
+            <li data-foto="assets/img/urun/tavuk-kalcali-but.jpg">TAVUK KALÇALI BUT</li>
+            <li data-foto="assets/img/urun/tavuk-julyen.jpg">TAVUK JÜLYEN</li>
+            <li data-foto="assets/img/urun/tavuk-kusbasi.jpg">TAVUK KUŞBAŞI</li>
+            <li data-foto="assets/img/urun/tavuk-gogus.jpg">TAVUK DERİSİZ GÖĞÜS</li>
+            <li data-foto="assets/img/urun/butun-tavuk.jpg">BÜTÜN TAVUK</li>
+            <li data-foto="assets/img/urun/donerlik-tavuk.jpg">DÖNERLİK TAVUK</li>
+            <li data-foto="assets/img/urun/tavuk-kalca-sis.jpg">TAVUK KALÇA ŞİŞ</li>
+            <li data-foto="assets/img/urun/tavuk-kanat.jpg">TAVUK KANAT</li>
+          </ol>
+        </div>
+
+        <div class="prod-panel" id="urun-kofte-doner">
+          <h3 class="prod-panel__title">KÖFTE &amp; DÖNER</h3>
+          <div class="ph ph--under prod-photo">
+            <span class="ph__label" aria-hidden="true"><b>[KÖFTE &amp; DÖNER FOTOĞRAFI]</b></span>
+            <img src="assets/img/urun/kofte-doner-kapak.jpg" alt="" width="1200" height="1500" loading="lazy">
+          </div>
+          <ol class="prod-list">
+            <li data-foto="assets/img/urun/kofte.jpg">KÖFTE</li>
+            <li data-foto="assets/img/urun/hamburger-koftesi.jpg">HAMBURGER KÖFTESİ</li>
+            <li data-foto="assets/img/urun/et-doner.jpg">ET DÖNER</li>
+            <li data-foto="assets/img/urun/tavuk-doner.jpg">TAVUK DÖNER</li>
+          </ol>
+        </div>
+
+        <p class="prod-note" data-prod-note><a href="#teklif">FİYAT İÇİN LİSTENİZİ GÖNDERİN →</a></p>
       </div>
     </div>
   </section>
@@ -585,13 +668,13 @@
         <h2 class="h-section quote__title" id="teklif-baslik">HAFTALIK<br>ET LİSTENİZİ<br>GÖNDERİN.</h2>
         <p class="quote__lead">Hangi üründen ne kadar gerektiğini yazın; fiyat ve teslimat günüyle size dönelim.</p>
         <div class="btn-row">
-          <a class="btn btn--white btn--quote" href="#teklif-formu" data-site-href="whatsapp">
+          <a class="btn btn--white btn--quote" href="https://wa.me/905303422540?text=Merhaba%2C%20teklif%20almak%20istiyorum." target="_blank" rel="noopener" data-site-href="whatsapp">
             <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#i-chat"/></svg>
             WHATSAPP'TAN YAZ
           </a>
-          <a class="btn btn--ghost-light btn--quote" href="#teklif-formu" data-site-href="telefon">
+          <a class="btn btn--ghost-light btn--quote" href="tel:+905303422540" data-site-href="telefon">
             <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#i-phone"/></svg>
-            <span data-site="telefon">[TELEFON]</span>
+            <span data-site="telefon">0530 342 25 40</span>
           </a>
         </div>
       </div>
@@ -625,7 +708,7 @@
         </div>
         <div class="field">
           <label class="field__label" for="f-liste">ÜRÜN VE MİKTAR</label>
-          <textarea class="field__input" id="f-liste" name="liste" rows="4" placeholder="Örn. 40 kg dana antrikot, 2 kuzu karkas — haftalık" required aria-describedby="f-liste-hata"></textarea>
+          <textarea class="field__input" id="f-liste" name="liste" rows="4" placeholder="Örn. 40 kg dana antrikot, 2 bütün kuzu, 30 kg tavuk baget — haftalık" required aria-describedby="f-liste-hata"></textarea>
           <p class="field__error" id="f-liste-hata" hidden></p>
         </div>
         <button class="btn btn--ink" type="submit">
@@ -643,8 +726,8 @@
 <footer class="site-footer">
   <div class="container site-footer__top">
     <div class="site-footer__brand">
-      <img class="site-footer__logo" src="assets/img/efeler-logo.png" alt="Efeler Kasap Izgara logosu" width="132" height="127" loading="lazy">
-      <p>Restoran, otel, catering ve marketlere toptan dana ve kuzu eti.</p>
+      <img class="site-footer__logo" src="assets/img/efeler-logo-koyu.svg" alt="Efeler Toptan Et logosu" width="1081" height="1315" loading="lazy">
+      <p>Restoran, otel, catering ve marketlere toptan dana, kuzu ve tavuk eti.</p>
     </div>
     <nav class="site-footer__col" aria-labelledby="alt-menu-baslik">
       <p class="site-footer__title" id="alt-menu-baslik">MENÜ</p>
@@ -662,10 +745,14 @@
     </nav>
     <address class="site-footer__col site-footer__contact">
       <p class="site-footer__title">İLETİŞİM</p>
-      <span data-site="adres">[ADRES]</span>
-      <a data-site="telefon" data-site-href="telefon">[TELEFON]</a>
+      <span data-site="adres" data-lines>İsmetpaşa Mh. 85/1 Sk. No: 8/10 A<br>Sultangazi / İstanbul</span>
+      <a class="site-footer__map" href="https://www.google.com/maps/search/?api=1&amp;query=%C4%B0smetpa%C5%9Fa%20Mh.%2085%2F1%20Sk.%20No%3A%208%2F10%20A%2C%20Sultangazi%20%2F%20%C4%B0stanbul" target="_blank" rel="noopener" data-site-href="adres">Yol tarifi →</a>
+      <ul class="site-footer__people" data-yetkililer>
+        <li><span>Ali Seydi Öter</span><a href="tel:+905303422540">0530 342 25 40</a></li>
+        <li><span>Zeynep Sude Öter</span><a href="tel:+905300490077">0530 049 00 77</a></li>
+      </ul>
       <a data-site="eposta" data-site-href="eposta">[E-POSTA]</a>
-      <span class="site-footer__hours" data-site="calismaSaatleri">[ÇALIŞMA SAATLERİ]</span>
+      <span class="site-footer__hours" data-site="calismaSaatleri">06:00 – 17:00</span>
     </address>
   </div>
 
@@ -673,7 +760,7 @@
 
   <div class="site-footer__bottom">
     <div class="container site-footer__bottom-inner">
-      <span>© 2026 Efeler. Tüm hakları saklıdır.</span>
+      <span>© 2026 <span data-site="unvan">Efeler Et Gıda San. ve Tic. Ltd. Şti.</span> Tüm hakları saklıdır.</span>
       <div class="site-footer__social">
         <a class="bar-link" href="#top" data-site-href="instagram">INSTAGRAM</a>
         <a class="bar-link" href="#top" data-site-href="facebook">FACEBOOK</a>
@@ -684,7 +771,7 @@
 </footer>
 
 <!-- Sabit WhatsApp butonu: kapak geçilince belirir, teklif bölümünde gizlenir -->
-<a class="wa-float" href="#teklif" data-site-href="whatsapp" aria-label="WhatsApp'tan yazın" data-wa-float>
+<a class="wa-float" href="https://wa.me/905303422540?text=Merhaba%2C%20teklif%20almak%20istiyorum." target="_blank" rel="noopener" data-site-href="whatsapp" aria-label="WhatsApp'tan yazın" data-wa-float>
   <svg class="icon" width="28" height="28" aria-hidden="true"><use href="#i-chat"/></svg>
 </a>
 

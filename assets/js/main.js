@@ -1,23 +1,30 @@
 /* =========================================================================
    Efeler Toptan Et — ana sayfa davranışları
 
-   Firma bilgileri YALNIZCA aşağıdaki SITE nesnesinden değiştirilir.
-   Boş bırakılan alanlar için sayfadaki köşeli parantezli metin ([TELEFON] gibi)
-   olduğu gibi kalır; JavaScript kapalıyken de sayfa eksiksiz görünür.
+   Firma bilgileri aşağıdaki SITE nesnesinden değiştirilir; sayfadaki metin ve
+   bağlantılar buradan kurulur. index.html'de aynı bilgiler, JavaScript kapalıyken
+   de görünsün diye düz metin olarak da yazılı: bir bilgi değişince orayı da
+   güncelleyin. Boş bırakılan alan için sayfadaki metin ([E-POSTA] gibi) kalır.
    ========================================================================= */
 
 const SITE = {
-  telefon: '',          // Sayfada göründüğü biçimde. Arama bağlantısı rakamlardan kurulur.
-  whatsapp: '',         // Ülke kodlu, yalnız rakam: 90 ile başlar, başta + ya da 0 yok.
+  unvan: 'Efeler Et Gıda San. ve Tic. Ltd. Şti.',   // Alt bilgideki © satırı
+  telefon: '0530 342 25 40',  // Sayfada göründüğü biçimde. Arama bağlantısı +90 ile kurulur.
+  whatsapp: '905303422540',   // Ülke kodlu, yalnız rakam: 90 ile başlar, başta + ya da 0 yok.
   eposta: '',
-  adres: '',
-  sehir: '',            // Kapaktaki "TOPTAN ET TEDARİKÇİSİ · [ŞEHİR]" satırı
-  calismaSaatleri: '',
-  kurulusYili: '',
-  gunlukKapasite: '',   // Örn. biçim: "__ TON / GÜN"
-  teslimatBolgesi: '',
-  instagram: '',        // Tam adres, https:// ile
-  facebook: '',         // Tam adres, https:// ile
+  adres: 'İsmetpaşa Mh. 85/1 Sk. No: 8/10 A, Sultangazi / İstanbul',  // Alt bilgide son virgülden iki satıra bölünür
+  yetkililer: [               // Alt bilgide ad ve tıklanabilir telefon
+    { ad: 'Ali Seydi Öter', telefon: '0530 342 25 40' },
+    { ad: 'Zeynep Sude Öter', telefon: '0530 049 00 77' },
+  ],
+  sehir: 'İSTANBUL',          // Kapaktaki "TOPTAN ET TEDARİKÇİSİ · İSTANBUL" satırı
+  calismaSaatleri: '06:00 – 17:00',
+  kurulusYili: '2023',
+  gunlukKapasite: '1 TON',
+  teslimatBolgesi: 'İSTANBUL',
+  teslimatAyrinti: 'Avrupa & Anadolu Yakası',  // Teslimat bölgesinin altındaki küçük satır
+  instagram: '',              // Tam adres, https:// ile
+  facebook: '',               // Tam adres, https:// ile
 };
 
 (function () {
@@ -34,23 +41,61 @@ const SITE = {
   const waUrl = (text) => 'https://wa.me/' + digits(SITE.whatsapp) + (text ? '?text=' + encodeURIComponent(text) : '');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+  // Türkiye numarası uluslararası biçimde aranır: "0530 342 25 40" → tel:+905303422540
+  const telHref = (value) => {
+    const d = digits(value);
+    return 'tel:+' + (d.startsWith('90') ? d : '90' + d.replace(/^0/, ''));
+  };
+
   /* ---------- 1. Yer tutucular ----------
-     data-site="anahtar"       → metni SITE değeriyle değiştirir (data-upper varsa Türkçe büyük harf)
-     data-site-href="anahtar"  → bağlantıyı kurar (tel:, mailto:, wa.me, sosyal medya) */
+     data-site="anahtar"       → metni SITE değeriyle değiştirir (data-upper varsa Türkçe büyük harf,
+                                 data-lines varsa son virgülden iki satıra böler)
+     data-site-href="anahtar"  → bağlantıyı kurar (tel:, mailto:, wa.me, harita, sosyal medya)
+     data-yetkililer           → SITE.yetkililer listesini ad + telefon olarak yazar */
 
   const HREF = {
-    telefon: (v) => 'tel:' + v.replace(/[^\d+]/g, ''),
+    telefon: telHref,
     eposta: (v) => 'mailto:' + v,
     whatsapp: () => waUrl(WA_SELAM),
+    adres: (v) => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(v),
     instagram: (v) => v,
     facebook: (v) => v,
   };
 
+  function setLines(el, value) {
+    const cut = value.lastIndexOf(',');
+    if (cut < 0) el.textContent = value;
+    else el.replaceChildren(value.slice(0, cut).trim(), document.createElement('br'), value.slice(cut + 1).trim());
+  }
+
+  function applyPeople() {
+    const list = $('[data-yetkililer]');
+    const people = (SITE.yetkililer || []).filter((person) => String(person.ad || '').trim());
+    if (!list || !people.length) return;
+
+    list.replaceChildren(...people.map((person) => {
+      const item = document.createElement('li');
+      const name = document.createElement('span');
+      name.textContent = person.ad.trim();
+      item.append(name);
+      const phone = String(person.telefon || '').trim();
+      if (phone) {
+        const link = document.createElement('a');
+        link.href = telHref(phone);
+        link.textContent = phone;
+        item.append(link);
+      }
+      return item;
+    }));
+  }
+
   function applySite() {
     $$('[data-site]').forEach((el) => {
-      const value = siteValue(el.dataset.site);
+      let value = siteValue(el.dataset.site);
       if (!value) return;
-      el.textContent = el.hasAttribute('data-upper') ? value.toLocaleUpperCase('tr-TR') : value;
+      if (el.hasAttribute('data-upper')) value = value.toLocaleUpperCase('tr-TR');
+      if (el.hasAttribute('data-lines')) setLines(el, value);
+      else el.textContent = value;
     });
 
     $$('[data-site-href]').forEach((el) => {
@@ -64,6 +109,8 @@ const SITE = {
         el.rel = 'noopener';
       }
     });
+
+    applyPeople();
   }
 
   /* ---------- Tema (aydınlık / karanlık) ----------
@@ -208,7 +255,202 @@ const SITE = {
     items.forEach((item) => item.addEventListener('focus', () => select(item.dataset.c)));
   }
 
-  /* ---------- 5. Belge büyütme ----------
+  /* ---------- 5. Ürün sekmeleri ----------
+     HTML'de gruplar (DANA, KUZU …) alt alta durur; burada sekmeye çevrilir.
+     Sekme adı grubun başlığından, sayı listedeki ürünlerden gelir.
+     Sol/sağ ok, Home ve End sekmeler arasında gezer. */
+
+  function initProductTabs() {
+    const root = $('[data-prod-tabs]');
+    if (!root) return;
+    const panels = $$('.prod-panel', root);
+    const note = $('[data-prod-note]', root);
+    if (!panels.length) return;
+
+    const bar = document.createElement('div');
+    bar.className = 'prod-tabs__bar';
+    const list = document.createElement('div');
+    list.className = 'prod-tabs__list';
+    list.setAttribute('role', 'tablist');
+    list.setAttribute('aria-label', 'Ürün grupları');
+    bar.append(list);
+
+    const tabs = panels.map((panel) => {
+      const count = $$('.prod-list > li', panel).length;
+      const tab = document.createElement('button');
+      tab.type = 'button';
+      tab.className = 'prod-tab';
+      tab.id = panel.id + '-sekme';
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-controls', panel.id);
+
+      const name = document.createElement('span');
+      name.textContent = $('.prod-panel__title', panel).textContent.trim();
+      const shownCount = document.createElement('span');
+      shownCount.className = 'prod-tab__count';
+      shownCount.setAttribute('aria-hidden', 'true');
+      shownCount.textContent = String(count).padStart(2, '0');
+      const spokenCount = document.createElement('span');
+      spokenCount.className = 'visually-hidden';
+      spokenCount.textContent = ', ' + count + ' ürün';
+      tab.append(name, shownCount, spokenCount);
+
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('aria-labelledby', tab.id);
+      initProductPanel(panel);
+      list.append(tab);
+      return tab;
+    });
+
+    // Dar ekranda çubuk yatay kayar; seçilen sekme tam görünsün
+    const reveal = (tab) => {
+      const start = tab.offsetLeft;
+      const end = start + tab.offsetWidth;
+      const behavior = reduceMotion.matches ? 'auto' : 'smooth';
+      if (start < list.scrollLeft) list.scrollTo({ left: start, behavior });
+      else if (end > list.scrollLeft + list.clientWidth) list.scrollTo({ left: end - list.clientWidth, behavior });
+    };
+
+    const select = (index) => {
+      tabs.forEach((tab, i) => {
+        const on = i === index;
+        tab.setAttribute('aria-selected', String(on));
+        tab.tabIndex = on ? 0 : -1;
+        panels[i].hidden = !on;
+      });
+      // "Fiyat için listenizi gönderin" notu açık listenin altına taşınır
+      if (note) $('.prod-list', panels[index]).after(note);
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => {
+        select(index);
+        reveal(tab);
+      });
+    });
+
+    list.addEventListener('keydown', (event) => {
+      const current = tabs.indexOf(event.target);
+      if (current < 0) return;
+      const last = tabs.length - 1;
+      const next = {
+        ArrowRight: current === last ? 0 : current + 1,
+        ArrowLeft: current === 0 ? last : current - 1,
+        Home: 0,
+        End: last,
+      }[event.key];
+      if (next === undefined) return;
+      event.preventDefault();
+      select(next);
+      tabs[next].focus();
+      reveal(tabs[next]);
+    });
+
+    root.prepend(bar);
+    root.classList.add('is-tabbed');
+    select(0);
+  }
+
+  /* Ürün satırı ve fotoğraf, kesim şeması gibi: fareyle üzerine gelmek önizler;
+     tıklama, dokunma ya da klavye odağı seçer. data-foto'lu ürün kendi fotoğrafını,
+     olmayan grubun kapak fotoğrafını gösterir. Dosyası bulunamayan fotoğraf gösterilmez. */
+
+  function initProductPanel(panel) {
+    const frame = $('.prod-photo', panel);
+    const rows = $$('.prod-list > li', panel);
+    const layers = new Map();   // fotoğrafın tam adresi → <img>
+    let cover = frame ? $('img', frame) : null;
+    let selected = null;
+    let current = null;
+    let shown = null;
+
+    const fullUrl = (src) => new URL(src, document.baseURI).href;
+
+    const imageFor = (row) => {
+      const src = row && row.dataset.foto;
+      if (!src) return cover;
+      const key = fullUrl(src);
+      if (cover && key === cover.src) return cover;
+      return layers.get(key) || cover;
+    };
+
+    const show = (row) => {
+      current = row;
+      rows.forEach((item) => item.classList.toggle('is-active', item === row));
+      const image = imageFor(row);
+      if (image === shown) return;
+      // Henüz inmemiş resme geçilmez; inince (hâlâ isteniyorsa) geçilir, o ana kadar eskisi kalır
+      if (image && !(image.complete && image.naturalWidth)) {
+        image.addEventListener('load', () => show(current), { once: true });
+        return;
+      }
+      shown?.classList.remove('is-shown');
+      image?.classList.add('is-shown');
+      shown = image;
+    };
+
+    const select = (row) => {
+      selected = row;
+      rows.forEach((item) => item.firstElementChild.setAttribute('aria-pressed', String(item === row)));
+      show(row);
+    };
+
+    // Dosya yoksa (henüz yüklenmemiş tavuk-kapak.jpg gibi) <img> kaldırılır, yer tutucu görünür
+    const dropIfMissing = (img, onMissing) => {
+      const drop = () => {
+        img.remove();
+        onMissing();
+        show(current);
+      };
+      if (img.complete && !img.naturalWidth) drop();
+      else img.addEventListener('error', drop, { once: true });
+    };
+
+    if (frame) {
+      if (cover) {
+        cover.classList.add('is-shown');
+        shown = cover;
+        dropIfMissing(cover, () => { cover = null; });
+      }
+
+      // Ürün fotoğrafları kapağın üstüne katman olarak eklenir; geçiş CSS'te
+      rows.forEach((row) => {
+        if (!row.dataset.foto) return;
+        const key = fullUrl(row.dataset.foto);
+        if (layers.has(key) || (cover && key === cover.src)) return;
+        const img = document.createElement('img');
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.alt = '';
+        img.width = 1200;
+        img.height = 1500;
+        img.src = row.dataset.foto;
+        frame.append(img);
+        layers.set(key, img);
+        dropIfMissing(img, () => layers.delete(key));
+      });
+    }
+
+    rows.forEach((row) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'prod-item';
+      button.setAttribute('aria-pressed', 'false');
+      button.append(...row.childNodes);
+      row.append(button);
+
+      button.addEventListener('pointerenter', (event) => {
+        if (event.pointerType === 'mouse') show(row);
+      });
+      button.addEventListener('pointerleave', (event) => {
+        if (event.pointerType === 'mouse') show(selected);
+      });
+      button.addEventListener('click', () => select(row));
+      button.addEventListener('focus', () => select(row));
+    });
+  }
+
+  /* ---------- 6. Belge büyütme ----------
      Kartta data-src doluysa o görsel, boşsa yer tutucu gösterilir.
      data-pdf doluysa pencerede "PDF olarak indir" bağlantısı çıkar. */
 
@@ -263,7 +505,7 @@ const SITE = {
     });
   }
 
-  /* ---------- 6. Teklif formu → WhatsApp ----------
+  /* ---------- 7. Teklif formu → WhatsApp ----------
      Sunucu yok: alanlar doğrulanır, mesaj oluşturulur, wa.me yeni sekmede açılır. */
 
   const FORM_RULES = {
@@ -341,7 +583,7 @@ const SITE = {
     });
   }
 
-  /* ---------- 7. Sabit WhatsApp butonu ----------
+  /* ---------- 8. Sabit WhatsApp butonu ----------
      Kapak geçilince belirir, teklif bölümü ekrandayken gizlenir. */
 
   function initFloatingWhatsApp() {
@@ -365,8 +607,8 @@ const SITE = {
     }).observe(quote);
   }
 
-  /* ---------- 8. Kaydırınca belirme ----------
-     Bölüm başlıkları ve kartlar ekrana girerken bir kez, hafifçe belirir. */
+  /* ---------- 9. Kaydırınca belirme ----------
+     Bölüm başlıkları, ürün listesi ve kartlar ekrana girerken bir kez, hafifçe belirir. */
 
   function initReveal() {
     if (reduceMotion.matches || !('IntersectionObserver' in window)) return;
@@ -379,10 +621,10 @@ const SITE = {
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
 
-    $$('.section-head, .prod, .step, .doc').forEach((el) => {
-      const group = el.closest('.prod-grid, .steps, .docs');
+    $$('.section-head, .prod-tabs, .step, .doc').forEach((el) => {
+      const group = el.closest('.steps, .docs');
       if (group) {
-        const index = $$('.prod, .step, .doc', group).indexOf(el);
+        const index = $$('.step, .doc', group).indexOf(el);
         el.style.setProperty('--reveal-delay', (index % 4) * 70 + 'ms');
       }
       el.classList.add('reveal');
@@ -395,6 +637,7 @@ const SITE = {
   initStickyHeader();
   initMenu();
   initCutMap();
+  initProductTabs();
   initDocs();
   initQuoteForm();
   initFloatingWhatsApp();

@@ -8,6 +8,100 @@
    (tarayıcı dili tanımazsa "i" → "I" olur).
    ========================================================================= */
 
+/* ---------- Yazı tipleri (sitede gömülü: assets/fonts/) ----------
+   Google Fonts'tan indirildi, yalnız latin + latin-ext (Türkçe harflerin hepsi dahil). Lisans: OFL, dosyalar yanında.
+   Big Shoulders Display ve Hanken Grotesk değişken yazı tipi: tek dosya bütün kalınlıkları kapsar.
+   Kapakta ilk görünenler index.html'de <link rel="preload"> ile önceden yüklenir. */
+@font-face {
+  font-family: 'Big Shoulders Display';
+  font-style: normal;
+  font-weight: 700 900;
+  font-display: swap;
+  src: url("../fonts/big-shoulders-display-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Big Shoulders Display';
+  font-style: normal;
+  font-weight: 700 900;
+  font-display: swap;
+  src: url("../fonts/big-shoulders-display-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Hanken Grotesk';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../fonts/hanken-grotesk-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Hanken Grotesk';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../fonts/hanken-grotesk-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/ibm-plex-mono-400-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/ibm-plex-mono-400-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/ibm-plex-mono-500-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/ibm-plex-mono-500-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/ibm-plex-mono-600-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/ibm-plex-mono-600-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   /* Renkler */
   --ink: #1A1B16;          /* koyu zemin, ana metin */
@@ -100,6 +194,7 @@
   --cut-back: var(--muted-dark);
   --cut-badge: var(--ink-3);
   --cut-row: var(--white);
+  --prod-row: var(--stone);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -136,6 +231,7 @@
     --cut-back: var(--ink);
     --cut-badge: var(--line-dark);
     --cut-row: var(--ink-3);
+    --prod-row: var(--ink-3);
   }
 }
 
@@ -172,6 +268,7 @@
   --cut-back: var(--ink);
   --cut-badge: var(--line-dark);
   --cut-row: var(--ink-3);
+  --prod-row: var(--ink-3);
 }
 
 /* Tema değişirken (yalnızca butonla, hareket azaltma kapalıyken) renkler yumuşak geçer */
@@ -268,6 +365,42 @@ main {
   width: 0;
   height: 0;
   overflow: hidden;
+}
+
+/* Temaya göre görünen öğe (ör. açık ve koyu zemin logoları); diğeri hiç gösterilmez */
+.only-dark {
+  display: none;
+}
+
+:root[data-theme="dark"] .only-light {
+  display: none;
+}
+
+:root[data-theme="dark"] .only-dark {
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .only-light {
+    display: none;
+  }
+
+  :root:not([data-theme="light"]) .only-dark {
+    display: block;
+  }
+}
+
+/* Ekranda görünmez, ekran okuyucu okur */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 .skip-link {
@@ -437,7 +570,9 @@ main {
 
 /* ---------- Yer tutucu foto kutusu ----------
    Sabit en-boy oranlı kutu. İçine <img> konunca resim kutuyu doldurur,
-   tarama ve etiket kendiliğinden kaybolur. */
+   tarama ve etiket kendiliğinden kaybolur.
+   .ph--under: tarama ve etiket resmin altında kalır. Dosyası henüz sunucuda
+   olmayan resim görünmez, yer tutucu görünür (JavaScript gerekmez). */
 
 .ph {
   --ph-a: var(--hatch-a);
@@ -461,17 +596,26 @@ main {
   object-fit: cover;
 }
 
-.ph:has(> img) {
+.ph:not(.ph--under):has(> img) {
   background: none;
 }
 
-.ph:has(> img) > .ph__label {
+.ph:not(.ph--under):has(> img) > .ph__label {
   display: none;
 }
 
 .ph__label b {
   font-weight: 600;
   color: var(--ph-strong);
+}
+
+/* JavaScript kapalıyken dosyası olmayan resim: tarayıcının kırık resim simgesi taramayla örtülür
+   (::after yalnızca yüklenemeyen resimde çizilir). JavaScript açıkken resim kaldırılır, etiket görünür. */
+.ph--under > img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(135deg, var(--ph-a) 0 var(--ph-w), var(--ph-b) var(--ph-w) calc(2 * var(--ph-w)));
 }
 
 /* ---------- Üst bilgi şeridi ---------- */
@@ -560,8 +704,9 @@ main {
   text-decoration: none;
 }
 
+/* Amblem 941×755: yüksekliği eski logoyla aynı (73 px, yapışınca 50 px), menü yüksekliği değişmez */
 .brand__logo {
-  width: 76px;
+  width: 91px;
   transition: width 0.2s;
 }
 
@@ -689,7 +834,7 @@ main {
 }
 
 .site-header.is-stuck .brand__logo {
-  width: 52px;
+  width: 62px;
 }
 
 /* Geniş ekranla hamburger arası: menü tek satırda kalsın */
@@ -926,11 +1071,13 @@ main {
   stroke-width: 2px;
 }
 
+/* Çevre yazısı çemberi eşit doldurur: 38 karakter (sondaki boşluk dahil) × (15 × 0.6 + 3.568) ≈ 2π × 76.
+   Yazı değişirse harf aralığı = 477.6 / karakter sayısı − 9 */
 .stamp__ring {
   font-family: var(--f-mono);
-  font-size: 13.5px;
+  font-size: 15px;
   font-weight: 600;
-  letter-spacing: 1.75px;
+  letter-spacing: 3.568px;
   fill: var(--white);
 }
 
@@ -958,13 +1105,17 @@ main {
   fill: var(--red);
 }
 
+/* Çıkartma: amblem (941×755) beyaz kesim konturu ve gölgeyle; koyu satırlar fotoğrafta ve koyu temada da seçilir */
 .hero__sticker {
   position: absolute;
   left: -9%;
-  bottom: -8%;
-  width: 47%;
+  bottom: -6%;
+  width: 54%;
   transform: rotate(-9deg);
-  filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.5));
+  filter:
+    drop-shadow(3px 0 0 var(--white)) drop-shadow(-3px 0 0 var(--white))
+    drop-shadow(0 3px 0 var(--white)) drop-shadow(0 -3px 0 var(--white))
+    drop-shadow(0 12px 18px rgba(0, 0, 0, 0.5));
 }
 
 .hero__facts {
@@ -999,6 +1150,17 @@ main {
   line-height: 1;
 }
 
+/* Değerin altındaki küçük mono satır (AVRUPA & ANADOLU YAKASI) */
+.facts .facts__note {
+  margin-top: 2px;
+  font-family: var(--f-mono);
+  font-weight: 400;
+  font-size: 12.5px;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  color: var(--text-2);
+}
+
 /* ---------- Kayan ürün şeridi ---------- */
 
 .ticker {
@@ -1017,7 +1179,7 @@ main {
   line-height: 1;
   letter-spacing: 0.02em;
   white-space: nowrap;
-  animation: ticker 40s linear infinite;
+  animation: ticker 53s linear infinite;   /* ~58 px/sn; şerit uzarsa süre de orantılı uzar */
 }
 
 .ticker__group {
@@ -1300,25 +1462,119 @@ main {
   }
 }
 
-/* ---------- 03 Ürünler ---------- */
+/* ---------- 03 Ürünler ----------
+   JavaScript yokken gruplar başlıklarıyla alt alta durur.
+   JS .is-tabbed ekler: üstte sekme çubuğu, bir anda tek grup. */
 
 .urunler .h-section {
   --lh: 0.9;
 }
 
-.prod-group {
+.prod-tabs {
+  --prod-cols: minmax(240px, 0.72fr) minmax(0, 2fr);
+  --prod-gap: clamp(28px, 4vw, 56px);
   display: flex;
   flex-direction: column;
-  gap: 22px;
 }
 
-.prod-group__head {
+.prod-tabs:not(.is-tabbed) .prod-panel + .prod-panel {
+  margin-top: 64px;
+}
+
+/* Sekme çubuğu 2 px cetvelin üstünde durur; dar ekranda yatay kayar */
+.prod-tabs__bar {
+  margin-bottom: clamp(28px, 3.5vw, 44px);
+  border-bottom: 2px solid var(--text);
+}
+
+.prod-tabs__list {
+  position: relative;
+  display: flex;
+  gap: clamp(8px, 2vw, 28px);
+  margin: 0 -10px -2px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+.prod-tabs__list::-webkit-scrollbar {
+  display: none;
+}
+
+.prod-tab {
+  position: relative;
+  flex: none;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  min-height: 56px;
+  padding: 10px 10px 18px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: clamp(28px, 3vw, 36px);
+  line-height: 1;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+
+/* Seçili sekmenin kırmızı çubuğu yazı genişliğinde, cetvelin üstüne biner */
+.prod-tab::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 0;
+  height: 6px;
+  background: transparent;
+  transition: background-color 0.15s;
+}
+
+@media (hover: hover) {
+  .prod-tab:hover::after {
+    background: var(--line-mid);
+  }
+}
+
+.prod-tab[aria-selected="true"] {
+  color: var(--accent-large);
+}
+
+.prod-tab[aria-selected="true"]::after {
+  background: var(--red);
+}
+
+/* Kayan çubuk dışarı taşan çerçeveyi keser; odak çerçevesi içeride */
+.prod-tab:focus-visible {
+  outline-offset: -3px;
+}
+
+.prod-tab__count {
+  font-family: var(--f-mono);
+  font-weight: 500;
+  font-size: 12.5px;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+}
+
+/* Grup: dar ekranda fotoğraf listenin üstünde ve basık; genişte solda 4:5 */
+.prod-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "title" "photo" "list" "note";
+}
+
+/* Grup başlığı yalnızca JavaScript yokken görünür (kırmızı ad + çizgi) */
+.prod-panel__title {
+  grid-area: title;
   display: flex;
   align-items: center;
   gap: 18px;
-}
-
-.prod-group__title {
+  margin-bottom: 22px;
   font-family: var(--f-display);
   font-weight: 900;
   font-size: 34px;
@@ -1326,103 +1582,178 @@ main {
   color: var(--accent-large);
 }
 
-.prod-group__rule {
+.prod-panel__title::after {
+  content: "";
   flex: 1;
   height: 2px;
   background: var(--text);
 }
 
-.prod-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-  gap: 32px 24px;
+.is-tabbed .prod-panel__title {
+  display: none;
 }
 
-.prod {
+/* Fotoğraf yapışkan: uzun listenin altındaki ürüne dokununca da fotoğraf ekranda kalır */
+.prod-photo {
+  --ratio: 16 / 9;
+  grid-area: photo;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  isolation: isolate;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.js .prod-photo {
+  top: var(--header-stuck);
+}
+
+.prod-photo .ph__label {
+  padding: 16px;
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+/* Fotoğraf geçişi: yeni resim üste gelip belirir, alttaki geçiş bitince kaybolur */
+.is-tabbed .prod-photo > img {
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0s linear 0.35s;
+}
+
+.is-tabbed .prod-photo > img.is-shown {
+  z-index: 2;
+  opacity: 1;
+  transition: opacity 0.35s ease;
+}
+
+.prod-list {
+  grid-area: list;
+  columns: 2 300px;
+  column-gap: clamp(24px, 3vw, 48px);
+  border-top: 1px solid var(--line-soft);
+  counter-reset: urun;
+}
+
+/* Satır, kesim şeması listesinin dilinde: numara kutusu + ürün adı, arada ince çizgi */
+.prod-list > li {
+  position: relative;
+  display: flex;
+  align-items: center;
   gap: 14px;
-  color: var(--text);
-  text-decoration: none;
+  min-height: 61px;
+  padding: 8px;
+  border-bottom: 1px solid var(--line-soft);
+  break-inside: avoid;
+  counter-increment: urun;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 25px;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  transition: background-color 0.15s;
 }
 
-.prod__ph {
-  --ratio: 4 / 5;
+/* Sıra numarası kendiliğinden gelir. "/ ''" ekran okuyucuya okutmaz (<ol> zaten söyler). */
+.prod-list > li::before {
+  content: counter(urun, decimal-leading-zero);
+  content: counter(urun, decimal-leading-zero) / "";
+  flex: none;
   display: flex;
-  align-items: flex-end;
-  padding: 14px;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--cut-badge);
+  color: var(--white);
+  font-family: var(--f-mono);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  transition: background-color 0.15s;
 }
 
-/* Üzerine gelince fotoğrafın içine kırmızı çerçeve (resim konsa da üstte kalır) */
-.prod__ph::after {
+.prod-list > li.is-active {
+  background: var(--prod-row);
+}
+
+/* Küçük beyaz rakam --red üzerinde okunaklı olmaz; kutu --red-deep */
+.prod-list > li.is-active::before {
+  background: var(--red-deep);
+}
+
+/* JavaScript satırı düğmeye çevirir; düğmenin görünmez uzantısı satırın tamamını kaplar */
+.prod-item {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  letter-spacing: inherit;
+  text-align: left;
+}
+
+.prod-item::after {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 1;
-  border: 5px solid transparent;
-  pointer-events: none;
-  transition: border-color 0.15s;
 }
 
-.prod:hover .prod__ph::after,
-.prod:focus-visible .prod__ph::after {
-  border-color: var(--red);
+.prod-item:focus-visible {
+  outline: none;
 }
 
-.prod__row {
-  display: flex;
+.prod-list > li:has(> .prod-item:focus-visible) {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.prod-note {
+  grid-area: note;
+  margin-top: 14px;
+}
+
+.prod-note a {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.prod__name {
-  font-family: var(--f-display);
-  font-weight: 800;
-  font-size: 32px;
-  line-height: 1;
-}
-
-.prod__arrow {
-  transition: transform 0.18s, color 0.18s;
-}
-
-.prod:hover .prod__arrow,
-.prod:focus-visible .prod__arrow {
-  transform: translateX(6px);
-  color: var(--accent-large);
-}
-
-.prod__meta {
+  min-height: 44px;
   font-family: var(--f-mono);
-  font-size: 12.5px;
-  letter-spacing: 0.08em;
-  color: var(--text-3);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--link-small);
+  text-decoration: underline;
+  text-decoration-color: var(--link-line);
+  text-underline-offset: 5px;
 }
 
-.other {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px 14px;
-  padding-top: 22px;
-  border-top: 2px solid var(--text);
+.prod-note a:hover {
+  text-decoration-thickness: 2px;
 }
 
-.other .label {
-  margin-right: 8px;
-}
+@media (min-width: 640px) {
+  .prod-panel {
+    grid-template-columns: var(--prod-cols);
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas: "title title" "photo list" "photo note";
+    column-gap: var(--prod-gap);
+    align-items: start;
+  }
 
-/* Liste, etiketin yanından akması için üst kutunun satırına katılır */
-.tags {
-  display: contents;
-}
+  .prod-photo {
+    --ratio: 4 / 5;
+    top: 24px;
+    margin-bottom: 0;
+  }
 
-.tag {
-  padding: 7px 14px;
-  border: 1.5px solid var(--text);
-  font-size: 15px;
-  font-weight: 600;
+  .js .prod-photo {
+    top: calc(var(--header-stuck) + 24px);
+  }
 }
 
 /* ---------- 04 Süreç ---------- */
@@ -1891,6 +2222,32 @@ textarea.field__input {
   margin-block: -8.8px;
 }
 
+/* Küçük bağlantı: koyu zeminde beyaz, kırmızı alt çizgi (Belgeyi görüntüle gibi) */
+.site-footer__contact .site-footer__map {
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--red);
+  text-underline-offset: 4px;
+}
+
+.site-footer__people {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.site-footer__people li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.site-footer__people span {
+  font-size: 15px;
+  color: var(--soft-dark);
+}
+
 .site-footer__hours {
   color: var(--soft-dark);
 }
@@ -2046,6 +2403,158 @@ textarea.field__input {
   align-self: flex-start;
 }
 
+/* ---------- Açılış perdesi ----------
+   index.html'deki satır içi betik <html>'e sınıf ekler:
+   splash-on (perde görünür, sayfa kaymaz) → splash-logo (amblem belirir) → splash-open (perde açılır).
+   Yalnızca transform ve opacity canlandırılır. Perde iki temada da kırmızı. */
+
+.splash {
+  --splash-logo: min(40vw, 220px);
+  --splash-run: calc(var(--splash-logo) / 2 + 64px);   /* amblemin taşan yarısı + gölge payı */
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 1000;
+  display: none;
+  touch-action: none;
+}
+
+.splash-on {
+  overflow: hidden;
+}
+
+/* Perde gösterilmeyen açılışta, kapak yazı tipleri hazır olana kadar (en çok 300 ms) sayfa görünmez */
+.fonts-wait body {
+  visibility: hidden;
+}
+
+.splash-on .splash {
+  display: block;
+}
+
+/* İki taraf aynı hız ve eğriyle kayar. Her taraf, ekran dışına uzanan "pay" (--splash-run) kadar
+   geniştir; böylece translateX(±100%) amblemi ve gölgesini de ekrandan tam çıkarır ve iki kenar simetrik açılır. */
+.splash__side {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  will-change: transform;
+  transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* Sol taraf: kırmızı panel + panelin sağ kenarına ortalanmış amblem; en üstte */
+.splash__side--left {
+  left: 0;
+  width: calc(50% + 1px + var(--splash-run));
+  z-index: 2;
+}
+
+.splash__side--right {
+  left: calc(50% - 1px);
+  width: calc(50% + 1px + var(--splash-run));
+  background: var(--red);
+  z-index: 1;
+}
+
+/* Paneller ortada 2 px üst üste biner: aralarında ince çizgi kalmaz */
+.splash__panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: calc(50vw + 1px);
+  background: var(--red);
+}
+
+/* Aralıkta derinlik: panelin sağ kenarında hafif iç gölge; kapalıyken görünmez, açılırken belirir */
+.splash__panel::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 48px;
+  box-shadow: inset -18px 0 26px -18px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  transition: opacity 0.4s ease 0.1s;
+}
+
+.splash-open .splash__panel::after {
+  opacity: 1;
+}
+
+/* Amblemin merkezi panelin sağ kenarında (birleşim çizgisi): yarısı panelde, yarısı dışarıda */
+.splash__logo-box {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50vw;
+  width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+
+.splash-logo .splash__logo-box {
+  opacity: 1;
+  animation: splash-logo-in 0.4s ease-out both;
+}
+
+/* Gölge: açılırken amblem sayfanın üstünde havada durur. Dönme ve küçülme panelle aynı süre ve eğride. */
+.splash__logo {
+  flex: none;
+  width: var(--splash-logo);
+  max-width: none;
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.35));
+  will-change: transform;
+  transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+@keyframes splash-logo-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.splash-open .splash__logo {
+  transform: rotate(-6deg) scale(0.92);
+}
+
+.splash-open .splash__side--left {
+  transform: translateX(-100%);
+}
+
+.splash-open .splash__side--right {
+  transform: translateX(100%);
+}
+
+/* Kapak başlığı ve görseli perde açılırken belirir (kaydırınca belirme ile aynı hareket) */
+.splash-on .hero__title,
+.splash-on .hero__media {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.splash-open .hero__title,
+.splash-open .hero__media {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
+}
+
+.splash-open .hero__media {
+  transition-delay: 0.4s;
+}
+
 /* ---------- Kaydırınca belirme (JS ekler, bir kez) ---------- */
 
 .reveal {
@@ -2080,5 +2589,21 @@ textarea.field__input {
   .reveal {
     opacity: 1;
     translate: none;
+  }
+
+  /* Açılış perdesi bölünmez, kaymaz; 0.3 sn'de solarak kaybolur */
+  .splash-open .splash__side--left,
+  .splash-open .splash__side--right,
+  .splash-open .splash__logo {
+    transform: none;
+  }
+
+  .splash-open .splash__panel::after {
+    opacity: 0;
+  }
+
+  .splash-open .splash {
+    opacity: 0;
+    transition: opacity 0.3s linear !important;
   }
 }
