@@ -19,10 +19,6 @@ const SITE = {
   ],
   sehir: 'İSTANBUL',          // Kapaktaki "TOPTAN ET TEDARİKÇİSİ · İSTANBUL" satırı
   calismaSaatleri: '06:00 – 17:00',
-  kurulusYili: '2023',
-  gunlukKapasite: '1 TON',
-  teslimatBolgesi: 'İSTANBUL',
-  teslimatAyrinti: 'Avrupa & Anadolu Yakası',  // Teslimat bölgesinin altındaki küçük satır
   instagram: '',              // Tam adres, https:// ile
   facebook: '',               // Tam adres, https:// ile
 };
@@ -456,7 +452,9 @@ const SITE = {
 
   function initDocs() {
     const dialog = $('[data-doc-dialog]');
-    if (!dialog || typeof dialog.showModal !== 'function') return;
+    const section = $('#sertifikalar');
+    // Sertifikalar bölümü gizliyken (hidden) ya da hiç yokken pencere kurulmaz
+    if (!dialog || !section || section.hidden || typeof dialog.showModal !== 'function') return;
 
     const title = $('[data-doc-title]', dialog);
     const name = $('[data-doc-name]', dialog);
@@ -621,7 +619,8 @@ const SITE = {
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
 
-    $$('.section-head, .prod-tabs, .step, .doc').forEach((el) => {
+    // Gizli bölümdekiler (ör. geçici olarak gizlenen Sertifikalar) atlanır
+    $$('.section-head, .prod-tabs, .step, .doc').filter((el) => !el.closest('[hidden]')).forEach((el) => {
       const group = el.closest('.steps, .docs');
       if (group) {
         const index = $$('.step, .doc', group).indexOf(el);

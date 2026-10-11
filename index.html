@@ -43,7 +43,7 @@
 <div class="splash" aria-hidden="true" data-splash>
   <div class="splash__side splash__side--left">
     <div class="splash__panel"></div>
-    <div class="splash__logo-box"><img class="splash__logo" data-src="assets/img/efeler-amblem-beyaz.svg" alt="" width="941" height="755"></div>
+    <div class="splash__logo-box"><img class="splash__logo" data-src="assets/img/efeler-logo-ilk.svg" alt="" width="1513" height="1459"></div>
   </div>
   <div class="splash__side splash__side--right"></div>
 </div>
@@ -173,8 +173,8 @@
         <a class="nav__link" href="#kesim">Kesim Şeması</a>
         <a class="nav__link" href="#urunler">Ürünler</a>
         <a class="nav__link" href="#surec">Süreç</a>
-        <a class="nav__link" href="#sertifikalar">Sertifikalar</a>
-        <a class="nav__link" href="#referanslar">Referanslar</a>
+        <!-- SERTİFİKALAR GEÇİCİ OLARAK GİZLİ — belgeler gelince açılacak (hidden'ı kaldırın) -->
+        <a class="nav__link" href="#sertifikalar" hidden>Sertifikalar</a>
       </nav>
       <div class="site-header__actions">
         <button class="theme-toggle" type="button" aria-label="Karanlık temaya geç" hidden data-theme-toggle>
@@ -237,28 +237,6 @@
           <img class="hero__sticker" src="assets/img/efeler-amblem.svg" alt="" width="941" height="755">
         </div>
       </div>
-    </div>
-
-    <div class="container hero__facts">
-      <dl class="facts">
-        <div class="facts__item">
-          <dt>KURULUŞ</dt>
-          <dd data-site="kurulusYili" data-upper>2023</dd>
-        </div>
-        <div class="facts__item">
-          <dt>GÜNLÜK KAPASİTE</dt>
-          <dd data-site="gunlukKapasite" data-upper>1 TON</dd>
-        </div>
-        <div class="facts__item">
-          <dt>TESLİMAT BÖLGESİ</dt>
-          <dd data-site="teslimatBolgesi" data-upper>İSTANBUL</dd>
-          <dd class="facts__note" data-site="teslimatAyrinti" data-upper>AVRUPA &amp; ANADOLU YAKASI</dd>
-        </div>
-        <div class="facts__item">
-          <dt>ÜRÜN FORMU</dt>
-          <dd>TAZE &amp; DONUK</dd>
-        </div>
-      </dl>
     </div>
   </section>
 
@@ -563,8 +541,9 @@
     </div>
   </section>
 
+  <!-- SERTİFİKALAR GEÇİCİ OLARAK GİZLİ — belgeler gelince açılacak (hidden'ı kaldırın; README: "Sertifikaları geri açma") -->
   <!-- 05 SERTİFİKALAR -->
-  <section class="section section--muted sertifikalar" id="sertifikalar" aria-labelledby="sertifikalar-baslik">
+  <section class="section section--muted sertifikalar" id="sertifikalar" aria-labelledby="sertifikalar-baslik" hidden>
     <div class="container section__inner">
       <div class="section-head">
         <div class="section-head__title">
@@ -640,31 +619,11 @@
     </div>
   </section>
 
-  <!-- 06 REFERANSLAR -->
-  <section class="section referanslar" id="referanslar" aria-labelledby="referanslar-baslik">
-    <div class="container section__inner">
-      <div class="section-head">
-        <div class="section-head__title">
-          <p class="label">06 — REFERANSLAR</p>
-          <h2 class="h-section h-section--sm" id="referanslar-baslik">ETİNİ BİZDEN ALAN MUTFAKLAR</h2>
-        </div>
-      </div>
-      <ul class="refs">
-        <li class="ref"><span class="ref__label">[MÜŞTERİ LOGOSU]</span></li>
-        <li class="ref"><span class="ref__label">[MÜŞTERİ LOGOSU]</span></li>
-        <li class="ref"><span class="ref__label">[MÜŞTERİ LOGOSU]</span></li>
-        <li class="ref"><span class="ref__label">[MÜŞTERİ LOGOSU]</span></li>
-        <li class="ref"><span class="ref__label">[MÜŞTERİ LOGOSU]</span></li>
-        <li class="ref"><span class="ref__label">[MÜŞTERİ LOGOSU]</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- 07 TEKLİF -->
+  <!-- 05 TEKLİF (Sertifikalar açılınca 06 olacak) -->
   <section class="section quote" id="teklif" aria-labelledby="teklif-baslik" data-quote>
     <div class="container quote__inner">
       <div class="quote__text">
-        <p class="label">07 — TEKLİF AL</p>
+        <p class="label">05 — TEKLİF AL</p>
         <h2 class="h-section quote__title" id="teklif-baslik">HAFTALIK<br>ET LİSTENİZİ<br>GÖNDERİN.</h2>
         <p class="quote__lead">Hangi üründen ne kadar gerektiğini yazın; fiyat ve teslimat günüyle size dönelim.</p>
         <div class="btn-row">
@@ -739,8 +698,8 @@
     <nav class="site-footer__col" aria-labelledby="alt-kurumsal-baslik">
       <p class="site-footer__title" id="alt-kurumsal-baslik">KURUMSAL</p>
       <a class="foot-link" href="#top">Hakkımızda</a>
-      <a class="foot-link" href="#sertifikalar">Sertifikalar</a>
-      <a class="foot-link" href="#referanslar">Referanslar</a>
+      <!-- SERTİFİKALAR GEÇİCİ OLARAK GİZLİ — belgeler gelince açılacak (hidden'ı kaldırın) -->
+      <a class="foot-link" href="#sertifikalar" hidden>Sertifikalar</a>
       <a class="foot-link" href="#teklif">Teklif Al</a>
     </nav>
     <address class="site-footer__col site-footer__contact">

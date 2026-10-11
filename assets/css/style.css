@@ -163,7 +163,7 @@
 :root,
 :root[data-theme="light"] {
   color-scheme: only light;
-  --bg: var(--paper);            /* zemin A: kapak, menü, ürünler, referanslar */
+  --bg: var(--paper);            /* zemin A: kapak, menü, ürünler */
   --bg-alt: var(--white);        /* zemin B: kime hizmet, süreç */
   --bg-muted: var(--stone);      /* zemin C: kesim şeması, sertifikalar */
   --surface: var(--white);       /* belge kartı, form kutusu, pencere */
@@ -920,11 +920,11 @@ main {
     align-items: center;
     min-height: 56px;
     padding: 0;
-    border-bottom: 1px solid var(--line-soft);
   }
 
-  .js .nav__link:last-child {
-    border-bottom: 0;
+  /* Bağlantılar arasındaki çizgi üstte: gizli (hidden) bağlantı olsa da son görünenin altında çizgi kalmaz */
+  .js .nav__link + .nav__link {
+    border-top: 1px solid var(--line-soft);
   }
 }
 
@@ -971,7 +971,8 @@ main {
   flex-wrap: wrap;
   align-items: center;
   gap: 48px 56px;
-  padding-top: clamp(28px, 4.5vw, 60px);
+  /* Altta kayan şeride geçiş payı (dar ekranda çıkartmanın taşan ucu da sığar) */
+  padding-block: clamp(28px, 4.5vw, 60px) clamp(48px, 6vw, 88px);
 }
 
 .hero__text {
@@ -1116,49 +1117,6 @@ main {
     drop-shadow(3px 0 0 var(--white)) drop-shadow(-3px 0 0 var(--white))
     drop-shadow(0 3px 0 var(--white)) drop-shadow(0 -3px 0 var(--white))
     drop-shadow(0 12px 18px rgba(0, 0, 0, 0.5));
-}
-
-.hero__facts {
-  padding-block: clamp(40px, 5vw, 64px) clamp(40px, 5vw, 60px);
-}
-
-.facts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
-  gap: 28px 32px;
-  padding-top: 22px;
-  border-top: 1px solid var(--line-soft);
-}
-
-.facts__item {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.facts dt {
-  font-family: var(--f-mono);
-  font-size: 12.5px;
-  letter-spacing: 0.1em;
-  color: var(--text-3);
-}
-
-.facts dd {
-  font-family: var(--f-display);
-  font-weight: 800;
-  font-size: 38px;
-  line-height: 1;
-}
-
-/* Değerin altındaki küçük mono satır (AVRUPA & ANADOLU YAKASI) */
-.facts .facts__note {
-  margin-top: 2px;
-  font-family: var(--f-mono);
-  font-weight: 400;
-  font-size: 12.5px;
-  line-height: 1.4;
-  letter-spacing: 0.1em;
-  color: var(--text-2);
 }
 
 /* ---------- Kayan ürün şeridi ---------- */
@@ -1951,66 +1909,7 @@ main {
   inset: 0;
 }
 
-/* ---------- 06 Referanslar ---------- */
-
-.referanslar {
-  --gap: 36px;
-  padding-block: clamp(56px, 7vw, 96px);
-}
-
-.referanslar .section-head {
-  gap: 18px 64px;
-}
-
-.referanslar .section-head__title {
-  gap: 16px;
-}
-
-.referanslar .h-section {
-  --lh: 0.92;
-}
-
-.refs {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr));
-  gap: 16px;
-}
-
-.ref {
-  position: relative;
-  aspect-ratio: 3 / 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  border: 1.5px dashed var(--line-mid);
-  text-align: center;
-  font-family: var(--f-mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  color: var(--text-3);
-}
-
-/* Logolar kırpılmasın diye "contain" */
-.ref > img {
-  position: absolute;
-  inset: 12px;
-  width: calc(100% - 24px);
-  height: calc(100% - 24px);
-  object-fit: contain;
-}
-
-.ref:has(> img) > .ref__label {
-  display: none;
-}
-
-@media (max-width: 600px) {
-  .refs {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* ---------- 07 Teklif ---------- */
+/* ---------- 06 Teklif ---------- */
 
 .quote {
   padding-block: clamp(64px, 8.5vw, 116px);
@@ -2409,7 +2308,7 @@ textarea.field__input {
    Yalnızca transform ve opacity canlandırılır. Perde iki temada da kırmızı. */
 
 .splash {
-  --splash-logo: min(40vw, 220px);
+  --splash-logo: min(52vw, 300px);   /* efeler-logo-ilk.svg, 1513×1459 */
   --splash-run: calc(var(--splash-logo) / 2 + 64px);   /* amblemin taşan yarısı + gölge payı */
   position: fixed;
   top: 0;
