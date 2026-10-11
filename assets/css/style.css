@@ -321,6 +321,11 @@ a {
   color: inherit;
 }
 
+/* Telefon numarası satır sonunda ikiye bölünmez */
+a[href^="tel:"] {
+  white-space: nowrap;
+}
+
 h1, h2, h3, p, ol, ul, dl, dd, figure {
   margin: 0;
 }
@@ -416,6 +421,27 @@ main {
 
 .skip-link:focus {
   top: 16px;
+}
+
+/* Başka bir sitenin çerçevesinde (iframe) açılınca (ilk.js): içerik gizlenir, yalnızca siteyi açan bağlantı görünür */
+.is-framed body > * {
+  display: none !important;
+}
+
+.is-framed body > .frame-break {
+  position: fixed;
+  inset: 0;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--red-deep);
+  color: var(--white);
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 28px;
+  letter-spacing: 0.04em;
+  text-align: center;
 }
 
 .icon {
@@ -2036,6 +2062,21 @@ textarea.field__input {
   display: none;
 }
 
+/* KVKK notu (aydınlatma metni gelene kadar gizli) */
+.quote-form__kvkk {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--text-2);
+  text-wrap: pretty;
+}
+
+.quote-form__kvkk a {
+  font-weight: 700;
+  color: var(--link-small);
+  text-decoration-color: var(--link-line);
+  text-underline-offset: 3px;
+}
+
 /* ---------- Alt bilgi ---------- */
 
 .site-footer {
@@ -2302,8 +2343,170 @@ textarea.field__input {
   align-self: flex-start;
 }
 
+/* ---------- Ek sayfalar: 404.html ve kvkk.html ----------
+   Ana sayfanın menü (logo), buton ve alt bilgi parçalarını kullanır; menü yapışkan değildir. */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.page > main {
+  flex: 1;
+}
+
+.page-head {
+  border-bottom: 1px solid var(--line-soft);
+  background: var(--bg);
+}
+
+.page-head__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 18px;
+}
+
+.page .theme-toggle {
+  margin-left: auto;
+}
+
+/* 404 */
+.notfound__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px clamp(32px, 6vw, 96px);
+  padding-block: clamp(40px, 7vw, 104px);
+}
+
+.notfound__code {
+  flex: 0 1 auto;
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: clamp(132px, 26vw, 360px);
+  line-height: 0.8;
+  letter-spacing: 0.02em;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--red);
+  user-select: none;
+}
+
+.notfound__text {
+  flex: 1 1 420px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.notfound__lead {
+  max-width: 460px;
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--text-2);
+  text-wrap: pretty;
+}
+
+/* KVKK */
+/* Metin sütunu menüdeki logoyla aynı sol kenarda */
+.legal__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-block: clamp(40px, 6vw, 88px);
+}
+
+.legal__inner > * {
+  max-width: 780px;
+}
+
+.legal__meta {
+  display: grid;
+  gap: 12px;
+  padding: clamp(18px, 3vw, 28px);
+  border-left: 4px solid var(--accent-line);
+  background: var(--bg-alt);
+}
+
+.legal__meta div {
+  display: grid;
+  grid-template-columns: minmax(0, 150px) minmax(0, 1fr);
+  gap: 4px 16px;
+}
+
+.legal__meta dt {
+  font-family: var(--f-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  line-height: 1.9;
+  color: var(--text-3);
+}
+
+.legal__meta a {
+  color: var(--link-small);
+  text-decoration-color: var(--link-line);
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 520px) {
+  .legal__meta div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.legal__body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 72ch;
+  line-height: 1.65;
+}
+
+.legal__body h2 {
+  margin-top: 16px;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 30px;
+  line-height: 1.1;
+}
+
+.legal__body ul {
+  padding-left: 1.2em;
+  list-style: disc;
+}
+
+.legal__placeholder {
+  padding: 28px;
+  border: 2px dashed var(--line-mid);
+  font-family: var(--f-mono);
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+  text-align: center;
+}
+
+.legal__back {
+  align-self: flex-start;
+  font-weight: 700;
+  color: var(--link-small);
+  text-decoration-color: var(--link-line);
+  text-underline-offset: 4px;
+}
+
+.page .site-footer__bottom-inner {
+  align-items: center;
+}
+
+.page .site-footer__bottom-inner a {
+  text-decoration: none;
+}
+
 /* ---------- Açılış perdesi ----------
-   index.html'deki satır içi betik <html>'e sınıf ekler:
+   assets/js/acilis.js <html>'e sınıf ekler:
    splash-on (perde görünür, sayfa kaymaz) → splash-logo (amblem belirir) → splash-open (perde açılır).
    Yalnızca transform ve opacity canlandırılır. Perde iki temada da kırmızı. */
 

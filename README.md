@@ -3,14 +3,22 @@
 Tek sayfalık tanıtım sitesi. Saf HTML, CSS ve JavaScript; derleme adımı, npm paketi ya da framework yok.
 
 ```
-index.html            sayfanın tamamı
+index.html            ana sayfanın tamamı
+404.html              "Sayfa bulunamadı" sayfası (GitHub Pages olmayan adreslerde kendiliğinden gösterir)
+kvkk.html             KVKK aydınlatma metni şablonu (metin firmadan gelecek)
+robots.txt            arama motoru kuralları   ┐ alan adı günü doldurulacak
+sitemap.xml           site haritası            ┘ (ALANADI yer tutucusu)
+_config.yml           GitHub Pages ayarı: README ve çalışma dosyaları sitede yayınlanmaz
+CLAUDE.md             yapay zekâ yardımcısı için kısa kural ve bağlam dosyası (sitede yayınlanmaz)
 assets/css/style.css  bütün stiller (renkler ve ölçüler en üstte, :root altında)
 assets/js/main.js     firma bilgileri (SITE nesnesi) ve sayfa davranışları
-assets/img/           logo, ikonlar, fotoğraflar
+assets/js/ilk.js      ilk boyamadan önce: tema seçimi ve çerçeve koruması (her sayfada)
+assets/js/acilis.js   açılış perdesi (yalnız ana sayfada)
+assets/img/           logo, ikonlar, fotoğraflar, paylaşım görseli
 assets/fonts/         sitede gömülü yazı tipleri (woff2) ve lisansları
 ```
 
-`referans/` ve `PROMPT.md` çalışma dosyaları; sayfa bunlara bağlantı vermez. Depo olduğu gibi yayınlanırsa bu dosyalar da adresleriyle açılabilir. İstenmiyorsa yayından önce depodan çıkarın.
+`referans/` ve `PROMPT.md` çalışma dosyalarıdır; GitHub'a yüklemeyin (bkz. "Yayın günü kontrol listesi"). **Depo herkese açıksa, GitHub'a yüklenen her dosya github.com'da herkes tarafından okunabilir.** `_config.yml` yalnızca bu dosyaların sitenin adresinden açılmasını engeller.
 
 ## Siteyi açma
 
@@ -31,7 +39,7 @@ const SITE = {
 };
 ```
 
-Bir alan boş kaldıkça sayfada köşeli parantezli yer tutucu (`[E-POSTA]` gibi) görünür. Doldurulunca ilgili her yerde metin ve bağlantı birlikte güncellenir.
+`eposta`, `instagram` ve `facebook` boş kaldıkça alt bilgide **gizli** durur, ziyaretçi boş bağlantı görmez. Doldurulunca kendiliğinden görünür; ilgili her yerde metin ve bağlantı birlikte güncellenir. Instagram ve Facebook adresi `https://` ile başlamıyorsa güvenlik gereği bağlantı kurulmaz.
 
 **Bilgiler iki yerde yazılı.** Aynı bilgiler `index.html`'de de düz metin ve bağlantı olarak duruyor; JavaScript'i kapalı tarayıcılar onları gösterir. JavaScript açıkken `SITE`'taki değer geçerlidir. Bir bilgi değişince ikisini birlikte değiştirin: `index.html`'de Ctrl+F ile eski değeri (ör. `0530 342 25 40`) arayıp hepsini değiştirin. Bağlantılarda numara boşluksuz ve `90` ile yazılıdır (`tel:+905303422540`, `wa.me/905303422540`); onları da aratın.
 
@@ -62,11 +70,12 @@ Logo dosyaları `assets/img/` içinde. Sitede SVG'ler kullanılır; PNG'ler baş
 | `efeler-amblem.svg` (+ `.png`) | Renkli amblem (boğa + satırlar), açık zemin için. 941×755 | Menü (açık temada), kapaktaki eğik çıkartma |
 | `efeler-amblem-koyu.svg` (+ `.png`) | Amblem, satırlar beyaz; koyu zemin için | Menü (karanlık temada) |
 | `efeler-amblem-beyaz.svg` (+ `.png`) | Tek renk beyaz amblem; kırmızı zemin için | Sitede kullanılmıyor |
-| `efeler-logo-ilk.svg` (+ `.png`) | İlk logo: şeridinde EFELER / ET GIDA, beyaz çerçeveli çıkartma görünümü. 1513×1459 | Açılış perdesi |
+| `efeler-logo-ilk.svg` (+ `.png`) | İlk logo: şeridinde EFELER / ET GIDA, beyaz çerçeveli çıkartma görünümü. 1513×1459 | Açılış perdesi. Dosya yolu `assets/js/acilis.js` içindeki `LOGO` satırında. |
 | `efeler-logo.svg` | Amblem + EFELER / TOPTAN ET, açık zemin. 1081×1315 | Sitede kullanılmıyor |
 | `efeler-logo-koyu.svg` (+ `.png`) | Aynısı, koyu zemin | Alt bilgideki büyük logo |
 | `efeler-logo-beyaz.svg` (+ `.png`) | Aynısı, tek renk beyaz | Sitede kullanılmıyor |
-| `efeler-logo.png` | Açık zemin logosu, 1200×1460, şeffaf zemin | Paylaşım önizlemesi (`og:image`) |
+| `efeler-logo.png` | Açık zemin logosu, 1200×1460, şeffaf zemin | Sitede kullanılmıyor |
+| `og-gorsel.jpg` | Paylaşım görseli, 1200×630: koyu zeminde logo, "TOPTAN ET, USTA İŞİ KESİM." ve kırmızı ürün şeridi | WhatsApp, Facebook, X'te bağlantı paylaşılınca çıkan önizleme (`og:image`) |
 | `favicon-32.png`, `apple-touch-icon.png` | Site ikonları | Tarayıcı sekmesi, telefonda ana ekran |
 
 - Logonun alt metni her yerde "Efeler Toptan Et logosu". Kapaktaki çıkartma süs olduğu için `alt=""` (menüdeki logo zaten okunuyor).
@@ -82,7 +91,8 @@ Her fotoğraf alanı sabit oranlı bir kutudur. İçine `<img>` konunca resim ku
 
 - Küçük harf, Türkçe karakter yok, boşluk yerine tire: `dana-antrikot.jpg` (`Dana Antrikot.JPG` değil).
 - Fotoğraflar `.jpg`, logolar şeffaf zeminli `.png` ya da `.svg`.
-- Yüklemeden önce boyutu küçültün: fotoğraflarda uzun kenar 1600 px yeterli, dosya başına 300 KB altı hedefleyin.
+- Yüklemeden önce boyutu küçültün: fotoğraflarda uzun kenar 1600 px yeterli, dosya başına 300 KB altı hedefleyin. Hiçbir dosya 400 KB'ı geçmesin.
+- **Yüklemeden önce konum bilgisini temizleyin.** Telefonla çekilen fotoğrafların içinde çekildiği yerin GPS konumu, tarih ve telefon modeli saklı olabilir; siteye konan fotoğrafı indiren herkes bunu okuyabilir. Windows'ta: dosyaya sağ tıklayın → *Özellikler* → *Ayrıntılar* → en alttaki *Özellikleri ve Kişisel Bilgileri Kaldır* → *Tüm olası özellikleri kaldırılmış bir kopya oluştur* → *Tamam*. Oluşan kopyayı yükleyin. (Sitedeki mevcut fotoğrafların hepsi kontrol edildi, hiçbirinde konum ya da kişisel bilgi yok.)
 
 | Ne | Klasör ve ad | Oran / en az boyut |
 |---|---|---|
@@ -275,20 +285,63 @@ Bölüm zeminleri HTML'deki sınıflardan gelir: sınıf yoksa A, `section--alt`
 ## Sayfadaki davranışlar
 
 - **Açılış perdesi:** Sayfa açılırken ekranı kırmızı bir perde kaplar, ortasında ilk logo (`efeler-logo-ilk.svg`, EFELER / ET GIDA şeritli) belirir (0.4 sn). Sayfa yüklenince ve logo en az 0.8 sn tam göründükten sonra perde ortadan ikiye bölünüp iki yana açılır (0.9 sn); logo sol yarının kenarına yapışık, onunla tek parça çıkar. Logonun genişliği `style.css`'teki `--splash-logo` değişkeninde: `min(52vw, 300px)`. Kapak başlığı ve görseli bu sırada belirir. Perde aynı sekmede oturum boyunca bir kez gösterilir (`sessionStorage`, `efeler-acilis` anahtarı); sayfa yenilense de tekrar çıkmaz, yeni sekmede çıkar. Perde açıkken sayfa kaydırılamaz; açılınca sayfadan tamamen kaldırılır.
-  - Davranış `index.html`'de perdenin hemen altındaki kısa betikte, `main.js`'ten bağımsızdır: `main.js` yüklenmese ya da hata verse de çalışır. Sayfa 4 saniyede yüklenmezse ya da betikte hata olursa perde yine açılır. JavaScript kapalıysa perde hiç görünmez.
-  - Süreler betikteki `HOLD` (1200 ms: 0.4 sn beliriş + 0.8 sn bekleme) ve `LIMIT` (4000 ms) sabitlerinde, hareketler `style.css`'teki "Açılış perdesi" bölümünde.
+  - Davranış `assets/js/acilis.js` dosyasında, `main.js`'ten bağımsızdır: `main.js` yüklenmese ya da hata verse de çalışır. Sayfa 4 saniyede yüklenmezse ya da betikte hata olursa perde yine açılır. JavaScript kapalıysa perde hiç görünmez.
+  - Süreler `acilis.js`'teki `HOLD` (1200 ms: 0.4 sn beliriş + 0.8 sn bekleme) ve `LIMIT` (4000 ms) sabitlerinde, hareketler `style.css`'teki "Açılış perdesi" bölümünde.
   - Perdeyi yeniden görmek için tarayıcıda yeni bir sekmede açın.
 - **Yapışkan menü:** Sayfa kayınca üstte kalır ve küçülür; üst bilgi şeridi kayıp gider.
 - **Mobil menü:** 900 px altında bağlantılar hamburger butonun arkasına girer. Esc, bağlantıya tıklama ya da dışarı tıklama paneli kapatır.
 - **Kesim şeması:** Parçanın ya da listedeki satırın üzerine gelince ikisi birlikte vurgulanır. Dokunmatik ekranda dokununca, klavyede odaklanınca seçili kalır.
 - **Ürün sekmeleri:** Sekmeye tıklayınca ya da dokununca grup değişir. Klavyede sol/sağ ok, Home ve End sekmeler arasında gezer, Tab ürün listesine geçer. Dar ekranda sekme çubuğu yana kayar. JavaScript kapalıyken dört grup alt alta açık durur.
 - **Ürün fotoğrafı:** Fotoğraflı ürünün üzerine gelince fotoğraf o ürüne döner; dokununca, tıklayınca ya da klavyeyle odaklanınca seçili kalır. Fotoğraf kaydırırken yerinde kalır (telefonda menünün hemen altında), böylece listenin altındaki ürüne dokununca da görünür. "FİYAT İÇİN LİSTENİZİ GÖNDERİN →" notu açık listenin altında durur.
+  - Ürün fotoğrafları sayfa açılırken inmez (yalnızca grubun kapak fotoğrafı iner). Fare listeye girince o grubun fotoğrafları, telefonda dokunulan ürünün fotoğrafı iner; inene kadar önceki fotoğraf görünür. Böylece telefonda sayfa megabaytlarca gereksiz fotoğraf indirmez.
 - **Belge penceresi:** Esc, dışına tıklama ya da kapat butonu kapatır. Sertifikalar bölümü gizliyken kurulmaz.
 - **Teklif formu:** İşletme adı, telefon ve ürün-miktar zorunludur. Hatalar alanın altında Türkçe gösterilir.
+  - Karakter sınırı: işletme 80, yetkili 60, telefon 20, ürün ve miktar 1000. Telefonda yalnızca rakam, boşluk ve baştaki + kabul edilir.
+  - Form hiçbir sunucuya veri göndermez, hiçbir yerde saklamaz: bilgilerden bir mesaj kurar ve yalnızca WhatsApp'ı açar. Mesajı gönderen yine ziyaretçinin kendisidir.
+  - JavaScript kapalı tarayıcıda form gizlenir (çalışamaz, bilgiler adres çubuğuna düşerdi); "WHATSAPP'TAN YAZ" ve telefon butonları görünür kalır.
 - **Sabit WhatsApp butonu:** Kapak geçilince sağ altta belirir, teklif bölümü ekrandayken gizlenir.
 - **Kaydırınca belirme:** Başlıklar ve kartlar ekrana girerken bir kez hafifçe belirir.
 
-Ziyaretçinin cihazında "hareketi azalt" ayarı açıksa kayan şerit, dönen damga, belirme ve geçişlerin hepsi kapanır; ürün fotoğrafı da geçişsiz, anında değişir. Açılış perdesi bölünüp kaymaz, 0.3 sn'de solarak kaybolur. JavaScript kapalıyken de sayfa eksiksiz görünür; menü bağlantıları alt satıra sarılır.
+Ziyaretçinin cihazında "hareketi azalt" ayarı açıksa kayan şerit, dönen damga, belirme ve geçişlerin hepsi kapanır; ürün fotoğrafı da geçişsiz, anında değişir. Açılış perdesi bölünüp kaymaz, 0.3 sn'de solarak kaybolur. JavaScript kapalıyken de sayfa görünür (teklif formu hariç); menü bağlantıları alt satıra sarılır.
+
+## Güvenlik ayarları
+
+GitHub Pages'te sunucu ayarı (HTTP başlığı) yapılamadığı için güvenlik ayarları sayfaların içinde:
+
+- **İçerik güvenlik politikası (CSP):** `index.html`, `404.html` ve `kvkk.html` başındaki `Content-Security-Policy` satırı, sayfanın yalnızca kendi dosyalarını (betik, stil, yazı tipi, görsel) yüklemesine izin verir. Biri sayfaya kötü niyetli bir betik sokmayı başarsa bile çalışmaz.
+  - Bu yüzden **HTML'e satır içi `<script>…</script>`, `style="…"` ya da `onclick="…"` yazmayın**; çalışmaz. Betik `assets/js/` içine, stil `style.css`'e yazılır.
+  - İleride dışarıdan bir şey eklenirse (Google Haritalar penceresi, ziyaretçi sayacı, takip kodu, YouTube videosu), o adresin bu satıra eklenmesi gerekir; yoksa sessizce çalışmaz. Bunu bir geliştiriciye yaptırın.
+  - Bağlantılar (WhatsApp, Google Haritalar'da yol tarifi, Instagram) bu kurala takılmaz; yeni sekmede açılırlar.
+- **Yönlendiren bilgisi:** `referrer` satırı, ziyaretçi WhatsApp'a ya da haritaya geçerken karşı siteye yalnızca alan adını söyler, sayfa adresinin tamamını değil. Yeni sekmede açılan bütün bağlantılarda `rel="noopener noreferrer"` var.
+- **Çerçeve koruması (clickjacking):** Başka bir site bu sayfayı kendi sayfasının içine (iframe) gömerse `ilk.js` sayfayı gizler, yerine "Efeler Toptan Et sitesini açmak için dokunun →" yazan kırmızı bir ekran gösterir; dokununca site kendi penceresinde açılır. Not: bazı kod düzenleyicilerin önizleme paneli de sayfayı çerçeve içinde açar; orada bu ekranı görmeniz normaldir, sayfayı tarayıcıda açın.
+- **Tarayıcıda saklananlar:** Yalnızca iki kayıt: seçilen tema (`efeler-tema`) ve açılış perdesinin bu sekmede gösterildiği (`efeler-acilis`). Çerez yok, kişisel veri yok, formdaki bilgiler hiçbir yerde saklanmaz.
+- **Dış kaynak yok:** Sayfa başka hiçbir siteden betik, yazı tipi, görsel ya da takip kodu yüklemez.
+
+## Gizli bekleyenler
+
+İçeriği henüz gelmeyen her şey sayfada **gizli** (`hidden`) duruyor; boş bağlantı görünmüyor. Her birinin üstünde `GEÇİCİ OLARAK GİZLİ` yazan bir yorum satırı var; `index.html`'de Ctrl+F ile `GEÇİCİ OLARAK GİZLİ` aratınca hepsini bulursunuz.
+
+| Ne | Nerede | Açmak için |
+|---|---|---|
+| Sertifikalar (bölüm, menü ve alt bilgi bağlantısı) | `index.html` | "Sertifikaları geri açma" bölümü |
+| KVKK (formun altındaki not ve alt bilgideki bağlantı) | `index.html` | "KVKK'yı açma" bölümü |
+| Hakkımızda bağlantısı | `index.html`, alt bilgi, KURUMSAL | Hakkımızda metni gelince nereye gideceği belli olur; `href="#top"` yerine hedefi yazıp `hidden`'ı silin |
+| E-posta | `index.html`, alt bilgi, İLETİŞİM | `main.js`'te `eposta: ''` doldurulunca kendiliğinden görünür. JavaScript kapalı tarayıcılar için `index.html`'de de `hidden`'ı silip `href="mailto:adres"` ekleyin, `[E-POSTA]` yerine adresi yazın. |
+| Instagram, Facebook | `index.html`, alt bilginin en altı | `main.js`'te `instagram` / `facebook` doldurulunca kendiliğinden görünür. `index.html`'de de `hidden`'ı silip `href="#top"` yerine tam adresi yazın. |
+| MERSİS no ve vergi dairesi | `index.html`, alt bilginin en altındaki © satırı | `[MERSİS NO]` ve `[VERGİ DAİRESİ]` yerine bilgileri yazıp aynı satırdaki `<span hidden>`'ı `<span>` yapın |
+
+## KVKK'yı açma
+
+KVKK aydınlatma metni firmadan (tercihen hukuk danışmanından) gelecek; metni kendiniz yazmayın.
+
+1. `kvkk.html`'i açın. `[AYDINLATMA METNİ — firmadan gelecek]` satırını silip yerine metni yazın: her paragraf `<p>…</p>`, ara başlıklar `<h2>…</h2>`, maddeler `<ul><li>…</li></ul>`. Firma ünvanı, adres, telefon ve e-posta üstteki kutuda zaten var (`main.js`'teki `SITE`'tan gelir).
+2. `index.html`'de Ctrl+F ile `KVKK NOTU GEÇİCİ OLARAK GİZLİ` aratın. Altındaki `<p class="quote-form__kvkk" hidden>` satırından ` hidden`'ı silin: formun altında "TEKLİF İSTE'ye bastığınızda bilgileriniz teklif amacıyla WhatsApp üzerinden firmamıza iletilir. Ayrıntılar: KVKK Aydınlatma Metni" notu görünür. (Not, sizin verdiğiniz metindeki "Gönder" yerine formdaki butonun adını kullanıyor.)
+3. Ctrl+F ile `KVKK GEÇİCİ OLARAK GİZLİ` aratın; alttaki `<a class="bar-link" href="kvkk.html" hidden>KVKK</a>` satırından ` hidden`'ı silin.
+4. `index.html` ve `kvkk.html`'i GitHub'a yükleyin.
+
+## 404 sayfası
+
+Ziyaretçi sitede olmayan bir adrese giderse (ör. yanlış yazılmış bir bağlantı) GitHub Pages `404.html`'i gösterir: logo, "SAYFA BULUNAMADI.", ana sayfaya dönüş ve TEKLİF AL butonları. Telefon ve ünvan `main.js`'teki `SITE`'tan gelir. Alan adı bağlanınca `404.html`'deki `<base href="/">` satırını açın (bkz. "Yayın günü kontrol listesi"); açılmazsa `/a/b/c` gibi derin hatalı adreslerde sayfa stilsiz görünür.
 
 ## Taslak yayını
 
@@ -304,19 +357,54 @@ Site şu an müşteri onayı için taslak olarak yayında. `index.html` başınd
 
 **Firmadan beklenen bilgiler**
 
-- [ ] E-posta adresi (`SITE.eposta` ve `index.html`'deki `[E-POSTA]`)
+- [ ] E-posta adresi (`SITE.eposta` ve `index.html`'deki `[E-POSTA]`; bkz. "Gizli bekleyenler")
 - [ ] Instagram adresi
 - [ ] Facebook adresi
 - [ ] Belge taramaları; her belge için gerçek adı, veren kurum, belge no, geçerlilik tarihi ve PDF (gelince Sertifikalar bölümü geri açılacak; bkz. "Sertifikaları geri açma")
+- [ ] KVKK aydınlatma metni (bkz. "KVKK'yı açma")
+- [ ] MERSİS numarası ve vergi dairesi
+- [ ] Hakkımızda metni (ve nerede duracağı: ana sayfada bir bölüm mü, ayrı sayfa mı)
 - [ ] Çalışma günleri (saatler belli: 06:00 – 17:00; günler gelince `calismaSaatleri` alanına eklenir)
 - [ ] KUZU KASKİ fotoğrafı
-- [ ] Gerçek ürün fotoğrafları
+- [ ] Gerçek ürün fotoğrafları (yüklemeden önce konum bilgisini temizleyin; bkz. "Dosya adı kuralı")
 
 **Yayından önce**
 
-- [ ] **Yayına çıkarken** `index.html`'deki `<meta name="robots" content="noindex, nofollow">` satırını kaldırmak
-- [ ] "TÜM BELGELER" butonunun hedefi (şimdilik aynı bölüme gidiyor)
-- [ ] "Hakkımızda" bağlantısının hedefi (şimdilik sayfa başına gidiyor)
-- [ ] KVKK aydınlatma metni ve bağlantısı (şimdilik sayfa başına gidiyor)
-- [ ] Alan adı belli olunca `index.html` başındaki `og:image` adresini tam adres yapmak (`https://…/assets/img/efeler-logo.png`). Paylaşım önizlemeleri göreli adresi okuyamaz.
+- [ ] "TÜM BELGELER" butonunun hedefi (Sertifikalar açılınca; şimdilik aynı bölüme gidiyor)
 - [ ] Bütün metinlerin firmayla gözden geçirilmesi. Süreç bölümündeki "Besiciden seçilen dana ve kuzu." cümlesi tavuğu kapsamıyor; firmayla netleştirilmeli.
+- [ ] Alan adı günü: aşağıdaki "Yayın günü kontrol listesi"
+
+## Yayın günü kontrol listesi
+
+Alan adı bağlanacağı gün, sırayla. Örneklerdeki `alanadiniz.com` yer tutucudur; yerine kendi alan adınızı yazın. Alan adını her yere `https://` ile ve başında `www.` olup olmadığına dikkat ederek, GitHub'da ayarladığınızla aynı biçimde yazın.
+
+**1. GitHub'a yüklenmeyecekler** — Depoda varsa silin (depo herkese açıksa herkes okuyabilir):
+- [ ] `PROMPT.md` ve `referans/` klasörü (çalışma dosyaları)
+- [ ] `.env`, `.bak`, `.old`, `~` ile biten yedekler, `Thumbs.db`, `desktop.ini` gibi sistem dosyaları (şu an klasörde yok; ileride oluşursa)
+- [ ] Fiyat listesi, Excel/CSV, sözleşme gibi firma içi belgeler
+
+**2. Alan adını bağlayın**
+- [ ] GitHub'da depo → *Settings → Pages → Custom domain* kutusuna alan adını yazıp *Save*. (GitHub depoya `CNAME` adlı bir dosya ekler; silmeyin.)
+- [ ] Alan adını aldığınız firmanın panelinde GitHub'ın gösterdiği DNS kayıtlarını girin. Yayılması birkaç saat sürebilir.
+- [ ] Aynı sayfada **Enforce HTTPS** kutusunu işaretleyin (kutu ancak DNS yayıldıktan sonra açılır). Bu adım şart: CSP ve güvenli bağlantı buna dayanır.
+
+**3. `ALANADI` yer tutucularını doldurun** — Ctrl+F ile `ALANADI` aratın, her yerde alan adını yazın:
+- [ ] `index.html`: `ALAN ADI GÜNÜ` yazan yorumun altındaki dört satırı (`canonical`, `og:url`, `og:image`, `twitter:image`) yorumdan çıkarın: önlerindeki `<!-- … README: "Yayın günü kontrol listesi"` satırını ve sondaki `-->` satırını silin. Sonra hemen üstteki göreli `<meta property="og:image" content="assets/img/og-gorsel.jpg">` satırını ve onun üstündeki yorumu silin.
+  Önce: `<link rel="canonical" href="https://ALANADI/">` → Sonra: `<link rel="canonical" href="https://alanadiniz.com/">`
+- [ ] `kvkk.html`: `canonical` satırını aynı şekilde açın (`https://alanadiniz.com/kvkk.html`).
+- [ ] `robots.txt`: `Sitemap: https://ALANADI/sitemap.xml` → `Sitemap: https://alanadiniz.com/sitemap.xml`
+- [ ] `sitemap.xml`: `<loc>https://ALANADI/</loc>` → `<loc>https://alanadiniz.com/</loc>`
+- [ ] `404.html`: `<base href="/">` satırını yorumdan çıkarın (önündeki yorum satırlarını ve sondaki `-->`'yi silin; `ALANADI` yazmaz, olduğu gibi kalır).
+
+**4. Arama motorlarına açın**
+- [ ] `index.html`'deki `<meta name="robots" content="noindex, nofollow">` satırını ve üstündeki `TASLAK` yorumunu silin. Bu satır kaldıkça site Google'da hiç görünmez.
+
+**5. Yükleyin ve kontrol edin**
+- [ ] Değişen dosyaları yükleyin, 1–2 dakika bekleyin.
+- [ ] `https://alanadiniz.com` açılıyor ve adres çubuğunda kilit simgesi var.
+- [ ] `https://alanadiniz.com/olmayan-sayfa` açınca logolu "SAYFA BULUNAMADI." sayfası geliyor; `https://alanadiniz.com/a/b/c` de aynı görünüyor.
+- [ ] `https://alanadiniz.com/robots.txt` ve `/sitemap.xml` açılıyor, içinde `ALANADI` kalmamış.
+- [ ] `https://alanadiniz.com/README` açılmıyor (404 geliyor).
+- [ ] Telefonda: açılış perdesi, menü, ürün sekmeleri, teklif formu → WhatsApp, sağ alttaki WhatsApp butonu, alt bilgideki "Yol tarifi" çalışıyor.
+- [ ] Paylaşım önizlemesi: sitenin adresini kendinize WhatsApp'tan gönderin; koyu zeminli logo ve "TOPTAN ET, USTA İŞİ KESİM." görseli çıkmalı. Facebook için *Sharing Debugger* (developers.facebook.com/tools/debug) sayfasına adresi yapıştırıp *Scrape Again* deyin.
+- [ ] Google Search Console'a (search.google.com/search-console) alan adını ekleyip `sitemap.xml`'i gönderin.

@@ -4,14 +4,15 @@
    Firma bilgileri aşağıdaki SITE nesnesinden değiştirilir; sayfadaki metin ve
    bağlantılar buradan kurulur. index.html'de aynı bilgiler, JavaScript kapalıyken
    de görünsün diye düz metin olarak da yazılı: bir bilgi değişince orayı da
-   güncelleyin. Boş bırakılan alan için sayfadaki metin ([E-POSTA] gibi) kalır.
+   güncelleyin. Boş bırakılan e-posta, Instagram ve Facebook sayfada gizli kalır;
+   doldurulunca kendiliğinden görünür.
    ========================================================================= */
 
 const SITE = {
   unvan: 'Efeler Et Gıda San. ve Tic. Ltd. Şti.',   // Alt bilgideki © satırı
   telefon: '0530 342 25 40',  // Sayfada göründüğü biçimde. Arama bağlantısı +90 ile kurulur.
   whatsapp: '905303422540',   // Ülke kodlu, yalnız rakam: 90 ile başlar, başta + ya da 0 yok.
-  eposta: '',
+  eposta: '',                 // ad@alanadi.com; boşken alt bilgide gizli
   adres: 'İsmetpaşa Mh. 85/1 Sk. No: 8/10 A, Sultangazi / İstanbul',  // Alt bilgide son virgülden iki satıra bölünür
   yetkililer: [               // Alt bilgide ad ve tıklanabilir telefon
     { ad: 'Ali Seydi Öter', telefon: '0530 342 25 40' },
@@ -19,8 +20,8 @@ const SITE = {
   ],
   sehir: 'İSTANBUL',          // Kapaktaki "TOPTAN ET TEDARİKÇİSİ · İSTANBUL" satırı
   calismaSaatleri: '06:00 – 17:00',
-  instagram: '',              // Tam adres, https:// ile
-  facebook: '',               // Tam adres, https:// ile
+  instagram: '',              // Tam adres, https:// ile; boşken gizli
+  facebook: '',               // Tam adres, https:// ile; boşken gizli
 };
 
 (function () {
@@ -46,16 +47,20 @@ const SITE = {
   /* ---------- 1. Yer tutucular ----------
      data-site="anahtar"       → metni SITE değeriyle değiştirir (data-upper varsa Türkçe büyük harf,
                                  data-lines varsa son virgülden iki satıra böler)
-     data-site-href="anahtar"  → bağlantıyı kurar (tel:, mailto:, wa.me, harita, sosyal medya)
+     data-site-href="anahtar"  → bağlantıyı kurar (tel:, mailto:, wa.me, harita, sosyal medya);
+                                 bilgi gelene kadar gizli (hidden) duran bağlantı, bilgi girilince görünür olur
      data-yetkililer           → SITE.yetkililer listesini ad + telefon olarak yazar */
+
+  // Sosyal medya adresi yalnızca https:// ile başlıyorsa bağlantı olur (yanlış ya da zararlı adres sayfaya girmez)
+  const httpsOnly = (v) => (/^https:\/\/[^\s"'<>]+$/i.test(v) ? v : '');
 
   const HREF = {
     telefon: telHref,
-    eposta: (v) => 'mailto:' + v,
+    eposta: (v) => (/^[^\s@<>"']+@[^\s@<>"']+\.[^\s@<>"']+$/.test(v) ? 'mailto:' + v : ''),
     whatsapp: () => waUrl(WA_SELAM),
     adres: (v) => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(v),
-    instagram: (v) => v,
-    facebook: (v) => v,
+    instagram: httpsOnly,
+    facebook: httpsOnly,
   };
 
   function setLines(el, value) {
@@ -99,11 +104,13 @@ const SITE = {
       const value = siteValue(key);
       if (!value || !HREF[key] || (key === 'whatsapp' && !digits(value))) return;
       const href = HREF[key](value);
+      if (!href) return;
       el.setAttribute('href', href);
       if (/^https?:/i.test(href)) {
         el.target = '_blank';
-        el.rel = 'noopener';
+        el.rel = 'noopener noreferrer';
       }
+      el.hidden = false;
     });
 
     applyPeople();
@@ -349,7 +356,9 @@ const SITE = {
 
   /* Ürün satırı ve fotoğraf, kesim şeması gibi: fareyle üzerine gelmek önizler;
      tıklama, dokunma ya da klavye odağı seçer. data-foto'lu ürün kendi fotoğrafını,
-     olmayan grubun kapak fotoğrafını gösterir. Dosyası bulunamayan fotoğraf gösterilmez. */
+     olmayan grubun kapak fotoğrafını gösterir. Dosyası bulunamayan fotoğraf gösterilmez.
+     Ürün fotoğrafları gerekene kadar inmez: fare listeye girince o grubun hepsi,
+     dokunmatikte ve klavyede yalnızca seçilen ürünün fotoğrafı iner. */
 
   function initProductPanel(panel) {
     const frame = $('.prod-photo', panel);
@@ -374,6 +383,7 @@ const SITE = {
       current = row;
       rows.forEach((item) => item.classList.toggle('is-active', item === row));
       const image = imageFor(row);
+      load(image);
       if (image === shown) return;
       // Henüz inmemiş resme geçilmez; inince (hâlâ isteniyorsa) geçilir, o ana kadar eskisi kalır
       if (image && !(image.complete && image.naturalWidth)) {
@@ -402,6 +412,15 @@ const SITE = {
       else img.addEventListener('error', drop, { once: true });
     };
 
+    // Bekleyen ürün fotoğrafını indirmeye başlar (zaten inmişse ya da kapaksa bir şey yapmaz)
+    const load = (img) => {
+      if (!img || !img.dataset.src) return;
+      const key = fullUrl(img.dataset.src);
+      img.src = img.dataset.src;
+      delete img.dataset.src;
+      dropIfMissing(img, () => layers.delete(key));
+    };
+
     if (frame) {
       if (cover) {
         cover.classList.add('is-shown');
@@ -415,15 +434,18 @@ const SITE = {
         const key = fullUrl(row.dataset.foto);
         if (layers.has(key) || (cover && key === cover.src)) return;
         const img = document.createElement('img');
-        img.loading = 'lazy';
         img.decoding = 'async';
         img.alt = '';
         img.width = 1200;
         img.height = 1500;
-        img.src = row.dataset.foto;
+        img.dataset.src = row.dataset.foto;   // load() ile iner
         frame.append(img);
         layers.set(key, img);
-        dropIfMissing(img, () => layers.delete(key));
+      });
+
+      // Fare listeye girince grubun bütün fotoğrafları iner: üzerinde gezinirken geçişler beklemesin
+      $('.prod-list', panel)?.addEventListener('pointerenter', (event) => {
+        if (event.pointerType === 'mouse') layers.forEach(load);
       });
     }
 
@@ -504,16 +526,22 @@ const SITE = {
   }
 
   /* ---------- 7. Teklif formu → WhatsApp ----------
-     Sunucu yok: alanlar doğrulanır, mesaj oluşturulur, wa.me yeni sekmede açılır. */
+     Sunucu yok: alanlar doğrulanır, mesaj oluşturulur, wa.me yeni sekmede açılır.
+     Form hiçbir yere veri göndermez, hiçbir yerde (çerez, tarayıcı deposu) saklamaz.
+     Karakter sınırları HTML'deki maxlength'te; burada ayrıca denetlenir. */
+
+  const tooLong = (v, max) => (v.length > max ? 'En fazla ' + max + ' karakter yazabilirsiniz.' : '');
 
   const FORM_RULES = {
-    isletme: (v) => (v ? '' : 'İşletme adını yazın.'),
+    isletme: (v) => (v ? tooLong(v, 80) : 'İşletme adını yazın.'),
+    yetkili: (v) => tooLong(v, 60),
     telefon: (v) => {
       if (!v) return 'Size dönebilmemiz için telefon numaranızı yazın.';
+      if (!/^\+?[0-9 ]+$/.test(v)) return 'Telefon numarasında yalnızca rakam ve boşluk kullanın; + işareti yalnızca başta olabilir.';
       if (digits(v).length < 10) return 'Telefon numarası eksik görünüyor; alan koduyla birlikte yazın.';
-      return '';
+      return tooLong(v, 20);
     },
-    liste: (v) => (v ? '' : 'Hangi üründen ne kadar gerektiğini yazın.'),
+    liste: (v) => (v ? tooLong(v, 1000) : 'Hangi üründen ne kadar gerektiğini yazın.'),
   };
 
   function buildMessage(form) {
@@ -534,6 +562,7 @@ const SITE = {
     const form = $('[data-quote-form]');
     if (!form) return;
     const status = $('[data-form-status]', form);
+    form.hidden = false;   // JavaScript kapalıyken gizli (index.html'deki nota bakın)
 
     const setError = (field, message) => {
       const box = document.getElementById(field.id + '-hata');

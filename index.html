@@ -1,12 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Güvenlik: sayfa yalnızca kendi dosyalarını (betik, stil, yazı tipi, görsel) yükler. Satır içi betik ve stil yok.
+     Dışarıdan bir şey eklenirse (harita, takip kodu …) burada izin verilmeden çalışmaz. README: "Güvenlik ayarları" -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Efeler Toptan Et — Toptan Dana, Kuzu ve Tavuk Eti · İstanbul</title>
 <meta name="description" content="İstanbul Avrupa ve Anadolu Yakası'nda restoran, otel, catering ve marketlere toptan dana, kuzu ve tavuk eti; köfte ve döner.">
 <meta name="theme-color" content="#1A1B16">
-<!-- TASLAK: müşteri onayı süresince arama motorları dizine eklemesin. Yayına çıkarken bu satırı kaldırın. -->
+<!-- TASLAK: arama motorları dizine eklemesin. Yayına çıkarken bu satırı kaldırın. -->
 <meta name="robots" content="noindex, nofollow">
 
 <meta property="og:type" content="website">
@@ -14,11 +18,21 @@
 <meta property="og:site_name" content="Efeler Toptan Et">
 <meta property="og:title" content="Efeler Toptan Et — Toptan Dana, Kuzu ve Tavuk Eti · İstanbul">
 <meta property="og:description" content="İstanbul Avrupa ve Anadolu Yakası'nda restoran, otel, catering ve marketlere toptan dana, kuzu ve tavuk eti; köfte ve döner.">
-<!-- Alan adı belli olunca tam adres yapın: https://.../assets/img/efeler-logo.png -->
-<meta property="og:image" content="assets/img/efeler-logo.png">
+<!-- ALAN ADI GÜNÜ: bu og:image satırını silin, aşağıdaki yorumdaki tam adresli satırları açın -->
+<meta property="og:image" content="assets/img/og-gorsel.jpg">
 <meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="1460">
-<meta property="og:image:alt" content="Efeler Toptan Et logosu">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Efeler Toptan Et logosu ve “Toptan et, usta işi kesim.” yazısı">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Efeler Toptan Et — Toptan Dana, Kuzu ve Tavuk Eti · İstanbul">
+<meta name="twitter:description" content="İstanbul Avrupa ve Anadolu Yakası'nda restoran, otel, catering ve marketlere toptan dana, kuzu ve tavuk eti; köfte ve döner.">
+<!-- ALAN ADI GÜNÜ: ALANADI yerine alan adını yazıp (https:// ve sondaki / kalsın) bu dört satırı yorumdan çıkarın.
+     README: "Yayın günü kontrol listesi"
+<link rel="canonical" href="https://ALANADI/">
+<meta property="og:url" content="https://ALANADI/">
+<meta property="og:image" content="https://ALANADI/assets/img/og-gorsel.jpg">
+<meta name="twitter:image" content="https://ALANADI/assets/img/og-gorsel.jpg">
+-->
 
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
@@ -31,104 +45,24 @@
 <link rel="preload" href="assets/fonts/hanken-grotesk-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
 
-<!-- İlk boyamadan önce: tema (kayıtlı tercih, yoksa cihaz ayarı) ve JS sınıfı -->
-<script>(function(d){var t;try{t=localStorage.getItem('efeler-tema')}catch(e){}if(t!=='light'&&t!=='dark')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';d.setAttribute('data-theme',t);d.classList.add('js')})(document.documentElement);</script>
+<!-- İlk boyamadan önce: tema, JS sınıfı ve çerçeve koruması (ilk.js), açılış perdesi (acilis.js) -->
+<script src="assets/js/ilk.js"></script>
+<script src="assets/js/acilis.js"></script>
 <script src="assets/js/main.js" defer></script>
 </head>
 <body id="top">
 
 <!-- AÇILIŞ PERDESİ: oturumda bir kez. Kırmızı perde ortadan ikiye bölünüp açılır; amblem sol perdenin
-     sağ kenarına yapışık, onunla tek parça çıkar. Davranış hemen alttaki betikte.
-     JavaScript kapalıysa perde hiç görünmez; hata ya da yavaş yüklemede en geç 4 sn'de açılır. -->
+     sağ kenarına yapışık, onunla tek parça çıkar. Davranış ve logo dosyası assets/js/acilis.js'te
+     (logo oradan, gerektiğinde yüklenir). JavaScript kapalıysa perde hiç görünmez; hata ya da yavaş
+     yüklemede en geç 4 sn'de açılır. -->
 <div class="splash" aria-hidden="true" data-splash>
   <div class="splash__side splash__side--left">
     <div class="splash__panel"></div>
-    <div class="splash__logo-box"><img class="splash__logo" data-src="assets/img/efeler-logo-ilk.svg" alt="" width="1513" height="1459"></div>
+    <div class="splash__logo-box"><img class="splash__logo" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" width="1513" height="1459"></div>
   </div>
   <div class="splash__side splash__side--right"></div>
 </div>
-<script>
-(function (d, w) {
-  var root = d.documentElement;
-  var el = d.querySelector('[data-splash]');
-  var KEY = 'efeler-acilis';
-  var HOLD = 1200;     // amblem 0.4 sn'de belirir, en az 0.8 sn tam görünür kalır
-  var LIMIT = 4000;    // sayfa bu sürede yüklenmezse de açılır
-  var seen, opened = false, loaded = false, logoAt = 0;
-
-  try { seen = w.sessionStorage.getItem(KEY); } catch (e) {}
-  if (seen || !el) {
-    if (el) el.parentNode.removeChild(el);
-    // Perde yok: sayfa, kapak yazı tipleri hazır olana kadar en çok 300 ms görünmez kalır (yedek yazı tipi görünmesin)
-    var fonts = d.fonts;
-    if (fonts && fonts.load && w.Promise) {
-      var show = function () { root.classList.remove('fonts-wait'); };
-      root.classList.add('fonts-wait');
-      w.setTimeout(show, 300);
-      try {
-        w.Promise.all([
-          fonts.load('900 1em "Big Shoulders Display"', 'Aİ'),
-          fonts.load('400 1em "Hanken Grotesk"', 'aş')
-        ]).then(show, show);
-      } catch (e) { show(); }
-    }
-    return;
-  }
-
-  function open() {
-    if (opened) return;
-    opened = true;
-    var reduce = w.matchMedia && w.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    root.classList.add('splash-open');
-    // Geçiş bitince katman kaldırılır, kaydırma serbest kalır (transitionend'e güvenilmez)
-    w.setTimeout(function () {
-      if (el.parentNode) el.parentNode.removeChild(el);
-      root.classList.remove('splash-on');
-    }, reduce ? 350 : 950);
-  }
-
-  function check() {
-    if (opened || !loaded || !logoAt) return;
-    var wait = logoAt + HOLD - Date.now();
-    if (wait > 0) w.setTimeout(check, wait);
-    else open();
-  }
-
-  w.setTimeout(open, LIMIT);
-  root.classList.add('splash-on');
-  try {
-    w.sessionStorage.setItem(KEY, '1');
-  } catch (e) {}
-  try {
-    var logo = el.getElementsByTagName('img')[0];
-    logo.onload = function () {
-      logoAt = Date.now();
-      root.classList.add('splash-logo');
-      check();
-    };
-    logo.onerror = function () {
-      logoAt = Date.now() - HOLD;
-      check();
-    };
-    logo.src = logo.getAttribute('data-src');
-    // Sayfa yüklenince yazı tiplerini de bekle (yedek yazı tipi perdenin arkasında kalsın)
-    w.addEventListener('load', function () {
-      var fonts = d.fonts;
-      if (fonts && fonts.ready && fonts.status !== 'loaded') {
-        fonts.ready.then(function () {
-          loaded = true;
-          check();
-        });
-      } else {
-        loaded = true;
-        check();
-      }
-    });
-  } catch (e) {
-    open();
-  }
-})(document, window);
-</script>
 
 <!-- Çizgi ikonlar: <svg><use href="#i-..."></use></svg> ile kullanılır -->
 <svg class="sprite" aria-hidden="true" focusable="false">
@@ -150,7 +84,7 @@
     <div class="topbar__contact">
       <span data-site="calismaSaatleri" data-upper>06:00 – 17:00</span>
       <a class="bar-link" href="tel:+905303422540" data-site="telefon" data-site-href="telefon">0530 342 25 40</a>
-      <a class="bar-link" href="https://wa.me/905303422540?text=Merhaba%2C%20teklif%20almak%20istiyorum." target="_blank" rel="noopener" data-site-href="whatsapp">WHATSAPP</a>
+      <a class="bar-link" href="https://wa.me/905303422540?text=Merhaba%2C%20teklif%20almak%20istiyorum." target="_blank" rel="noopener noreferrer" data-site-href="whatsapp">WHATSAPP</a>
     </div>
   </div>
 </aside>
@@ -159,7 +93,7 @@
 <header class="site-header" data-header>
   <div class="container site-header__inner">
     <div class="site-header__row">
-      <a class="brand" href="#top" aria-label="Efeler ana sayfa">
+      <a class="brand" href="#top" aria-label="Efeler Toptan Et ana sayfa">
         <!-- Temaya göre biri görünür: açık zeminde renkli, koyu zeminde beyaz satırlı amblem -->
         <img class="brand__logo only-light" src="assets/img/efeler-amblem.svg" alt="Efeler Toptan Et logosu" width="941" height="755" loading="lazy">
         <img class="brand__logo only-dark" src="assets/img/efeler-amblem-koyu.svg" alt="Efeler Toptan Et logosu" width="941" height="755" loading="lazy">
@@ -411,7 +345,7 @@
            Sekme adı grubun başlığından gelir. Sıra numaraları ve sekmedeki ürün sayısı kendiliğinden güncellenir.
            Ürün: bir <li> satırı, adı BÜYÜK HARFLE. Fotoğraflı ürün: <li data-foto="assets/img/urun/dosya-adi.jpg">.
            Grubun kapak fotoğrafı .prod-photo içindeki <img>; dosya henüz yoksa yerinde yer tutucu görünür.
-           FİYAT YAZMAYIN: firma sitede fiyat istemiyor. -->
+           Fiyat yazılmaz (README: "Ürünler"). -->
       <div class="prod-tabs" data-prod-tabs>
 
         <div class="prod-panel" id="urun-dana">
@@ -627,7 +561,7 @@
         <h2 class="h-section quote__title" id="teklif-baslik">HAFTALIK<br>ET LİSTENİZİ<br>GÖNDERİN.</h2>
         <p class="quote__lead">Hangi üründen ne kadar gerektiğini yazın; fiyat ve teslimat günüyle size dönelim.</p>
         <div class="btn-row">
-          <a class="btn btn--white btn--quote" href="https://wa.me/905303422540?text=Merhaba%2C%20teklif%20almak%20istiyorum." target="_blank" rel="noopener" data-site-href="whatsapp">
+          <a class="btn btn--white btn--quote" href="https://wa.me/905303422540?text=Merhaba%2C%20teklif%20almak%20istiyorum." target="_blank" rel="noopener noreferrer" data-site-href="whatsapp">
             <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#i-chat"/></svg>
             WHATSAPP'TAN YAZ
           </a>
@@ -638,20 +572,24 @@
         </div>
       </div>
 
-      <form class="quote-form" id="teklif-formu" aria-labelledby="teklif-baslik" novalidate data-quote-form>
+      <!-- Form hiçbir sunucuya veri göndermez ve hiçbir yerde saklamaz: JavaScript doğrular, mesajı kurar ve
+           yalnızca WhatsApp'ı açar. JavaScript kapalıyken işe yaramayacağı (ve bilgiler adres çubuğuna düşeceği)
+           için gizli kalır; main.js görünür yapar. Soldaki WhatsApp ve telefon butonları her durumda çalışır. -->
+      <form class="quote-form" id="teklif-formu" aria-labelledby="teklif-baslik" novalidate hidden data-quote-form>
         <div class="quote-form__grid">
           <div class="field">
             <label class="field__label" for="f-isletme">İŞLETME ADI</label>
-            <input class="field__input" id="f-isletme" name="isletme" type="text" autocomplete="organization" required aria-describedby="f-isletme-hata">
+            <input class="field__input" id="f-isletme" name="isletme" type="text" maxlength="80" autocomplete="organization" required aria-describedby="f-isletme-hata">
             <p class="field__error" id="f-isletme-hata" hidden></p>
           </div>
           <div class="field">
             <label class="field__label" for="f-yetkili">YETKİLİ</label>
-            <input class="field__input" id="f-yetkili" name="yetkili" type="text" autocomplete="name">
+            <input class="field__input" id="f-yetkili" name="yetkili" type="text" maxlength="60" autocomplete="name" aria-describedby="f-yetkili-hata">
+            <p class="field__error" id="f-yetkili-hata" hidden></p>
           </div>
           <div class="field">
             <label class="field__label" for="f-telefon">TELEFON</label>
-            <input class="field__input" id="f-telefon" name="telefon" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="f-telefon-hata">
+            <input class="field__input" id="f-telefon" name="telefon" type="tel" maxlength="20" autocomplete="tel" inputmode="tel" required aria-describedby="f-telefon-hata">
             <p class="field__error" id="f-telefon-hata" hidden></p>
           </div>
           <div class="field">
@@ -667,7 +605,7 @@
         </div>
         <div class="field">
           <label class="field__label" for="f-liste">ÜRÜN VE MİKTAR</label>
-          <textarea class="field__input" id="f-liste" name="liste" rows="4" placeholder="Örn. 40 kg dana antrikot, 2 bütün kuzu, 30 kg tavuk baget — haftalık" required aria-describedby="f-liste-hata"></textarea>
+          <textarea class="field__input" id="f-liste" name="liste" rows="4" maxlength="1000" placeholder="Örn. 40 kg dana antrikot, 2 bütün kuzu, 30 kg tavuk baget — haftalık" required aria-describedby="f-liste-hata"></textarea>
           <p class="field__error" id="f-liste-hata" hidden></p>
         </div>
         <button class="btn btn--ink" type="submit">
@@ -675,6 +613,8 @@
           <svg class="icon icon--bold" width="24" height="24" aria-hidden="true"><use href="#i-arrow"/></svg>
         </button>
         <p class="quote-form__status" role="status" data-form-status></p>
+        <!-- KVKK NOTU GEÇİCİ OLARAK GİZLİ — aydınlatma metni gelince açılacak (hidden'ı kaldırın; README: "KVKK'yı açma") -->
+        <p class="quote-form__kvkk" hidden>TEKLİF İSTE'ye bastığınızda bilgileriniz teklif amacıyla WhatsApp üzerinden firmamıza iletilir. Ayrıntılar: <a href="kvkk.html">KVKK Aydınlatma Metni</a></p>
       </form>
     </div>
   </section>
@@ -697,7 +637,8 @@
     </nav>
     <nav class="site-footer__col" aria-labelledby="alt-kurumsal-baslik">
       <p class="site-footer__title" id="alt-kurumsal-baslik">KURUMSAL</p>
-      <a class="foot-link" href="#top">Hakkımızda</a>
+      <!-- HAKKIMIZDA GEÇİCİ OLARAK GİZLİ — metni gelince hedefi yazılıp açılacak (hidden'ı kaldırın) -->
+      <a class="foot-link" href="#top" hidden>Hakkımızda</a>
       <!-- SERTİFİKALAR GEÇİCİ OLARAK GİZLİ — belgeler gelince açılacak (hidden'ı kaldırın) -->
       <a class="foot-link" href="#sertifikalar" hidden>Sertifikalar</a>
       <a class="foot-link" href="#teklif">Teklif Al</a>
@@ -705,12 +646,14 @@
     <address class="site-footer__col site-footer__contact">
       <p class="site-footer__title">İLETİŞİM</p>
       <span data-site="adres" data-lines>İsmetpaşa Mh. 85/1 Sk. No: 8/10 A<br>Sultangazi / İstanbul</span>
-      <a class="site-footer__map" href="https://www.google.com/maps/search/?api=1&amp;query=%C4%B0smetpa%C5%9Fa%20Mh.%2085%2F1%20Sk.%20No%3A%208%2F10%20A%2C%20Sultangazi%20%2F%20%C4%B0stanbul" target="_blank" rel="noopener" data-site-href="adres">Yol tarifi →</a>
+      <a class="site-footer__map" href="https://www.google.com/maps/search/?api=1&amp;query=%C4%B0smetpa%C5%9Fa%20Mh.%2085%2F1%20Sk.%20No%3A%208%2F10%20A%2C%20Sultangazi%20%2F%20%C4%B0stanbul" target="_blank" rel="noopener noreferrer" data-site-href="adres">Yol tarifi →</a>
       <ul class="site-footer__people" data-yetkililer>
         <li><span>Ali Seydi Öter</span><a href="tel:+905303422540">0530 342 25 40</a></li>
         <li><span>Zeynep Sude Öter</span><a href="tel:+905300490077">0530 049 00 77</a></li>
       </ul>
-      <a data-site="eposta" data-site-href="eposta">[E-POSTA]</a>
+      <!-- E-POSTA GEÇİCİ OLARAK GİZLİ — adres gelince açılacak. main.js'teki SITE.eposta doldurulunca kendiliğinden görünür;
+           JavaScript kapalı tarayıcılar için burada da hidden'ı kaldırıp href="mailto:..." ve adresi yazın. -->
+      <a data-site="eposta" data-site-href="eposta" hidden>[E-POSTA]</a>
       <span class="site-footer__hours" data-site="calismaSaatleri">06:00 – 17:00</span>
     </address>
   </div>
@@ -719,18 +662,23 @@
 
   <div class="site-footer__bottom">
     <div class="container site-footer__bottom-inner">
-      <span>© 2026 <span data-site="unvan">Efeler Et Gıda San. ve Tic. Ltd. Şti.</span> Tüm hakları saklıdır.</span>
+      <span>© 2026 <span data-site="unvan">Efeler Et Gıda San. ve Tic. Ltd. Şti.</span> Tüm hakları saklıdır.<!--
+        MERSİS VE VERGİ DAİRESİ GEÇİCİ OLARAK GİZLİ — firmadan gelince köşeli parantezleri doldurup hidden'ı kaldırın
+        --><span hidden> · MERSİS No: [MERSİS NO] · Vergi Dairesi: [VERGİ DAİRESİ]</span></span>
       <div class="site-footer__social">
-        <a class="bar-link" href="#top" data-site-href="instagram">INSTAGRAM</a>
-        <a class="bar-link" href="#top" data-site-href="facebook">FACEBOOK</a>
-        <a class="bar-link" href="#top">KVKK</a>
+        <!-- INSTAGRAM VE FACEBOOK GEÇİCİ OLARAK GİZLİ — main.js'teki SITE.instagram / SITE.facebook doldurulunca kendiliğinden görünür;
+             JavaScript kapalı tarayıcılar için burada da hidden'ı kaldırıp href'e tam adresi yazın. -->
+        <a class="bar-link" href="#top" target="_blank" rel="noopener noreferrer" data-site-href="instagram" hidden>INSTAGRAM</a>
+        <a class="bar-link" href="#top" target="_blank" rel="noopener noreferrer" data-site-href="facebook" hidden>FACEBOOK</a>
+        <!-- KVKK GEÇİCİ OLARAK GİZLİ — aydınlatma metni gelince açılacak (hidden'ı kaldırın; README: "KVKK'yı açma") -->
+        <a class="bar-link" href="kvkk.html" hidden>KVKK</a>
       </div>
     </div>
   </div>
 </footer>
 
 <!-- Sabit WhatsApp butonu: kapak geçilince belirir, teklif bölümünde gizlenir -->
-<a class="wa-float" href="https://wa.me/905303422540?text=Merhaba%2C%20teklif%20almak%20istiyorum." target="_blank" rel="noopener" data-site-href="whatsapp" aria-label="WhatsApp'tan yazın" data-wa-float>
+<a class="wa-float" href="https://wa.me/905303422540?text=Merhaba%2C%20teklif%20almak%20istiyorum." target="_blank" rel="noopener noreferrer" data-site-href="whatsapp" aria-label="WhatsApp'tan yazın" data-wa-float>
   <svg class="icon" width="28" height="28" aria-hidden="true"><use href="#i-chat"/></svg>
 </a>
 

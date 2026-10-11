@@ -1,0 +1,6 @@
+# GitHub Pages ayarı: aşağıdakiler depoda kalabilir ama sitede adresle açılmaz.
+exclude:
+  - README.md
+  - CLAUDE.md
+  - PROMPT.md
+  - referans
